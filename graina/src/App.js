@@ -61,10 +61,19 @@ class App extends React.Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
+          <svg witdh="100" height="100">
+            <circle 
+              cx="50"
+              cy="50"
+              r="50"
+              stroke={`rgb(50,0,100)`}
+              stroke-witdh="4"
+              fill={`rgb(50,0,100)`}
+              />
+          </svg>
           <h1 className="App-title">Welcome to Graina</h1>
         </header>
         <Box/>
-
       </div>
     );
   }
