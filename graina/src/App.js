@@ -1,82 +1,47 @@
 import React from 'react';
+import Grid from './components/Grid'
 import logo from './logo.svg';
 import './App.css';
+
+
+
+const testGrains = [
+  {color:{r:255,g:0,b:255}},
+  {color:{r:0,g:0,b:255}},
+  {color:{r:0,g:255,b:0}},
+  {color:{r:255,g:0,b:0}}
+]
+const testGrid = [
+  {x:0,y:0,grains:testGrains},
+  {x:1,y:0,grains:testGrains},
+  {x:0,y:1,grains:testGrains},
+  {x:1,y:1,grains:testGrains}
+]
 
 function rGB(){
   return Math.floor(Math.random() * 3) + 1
 }
 
-class Box extends React.Component {
+export default class App extends React.Component {
   constructor(){
     super()
     this.state={
-      r:0,
-      g:0,
-      b:10
+      data:[]
     }
   }
-  //
-  handleClick(){
-    switch(rGB()){
-      case 1: {
-        if(this.state.r < 245)
-          {this.setState({r:this.state.r + 10})} 
-        else{this.setState({r:0})}
-          break
-        }
-      case 2: {
-        if(this.state.g < 245)
-          {this.setState({g:this.state.g + 10})} 
-        else{this.setState({g:0})}
-          break
-        }
-      default: {
-        if(this.state.g < 245)
-          {this.setState({b:this.state.b + 10})} 
-        else{this.setState({b:0})}
-          break
-        }
-    }
+  componentDidMount(){
+    this.setState({data:testGrid})
   }
-
-  render(){
-    const buttonStyle={
-      background: `rgb(${this.state.r},${this.state.g},${this.state.r})`
-    }
-
-
+  render() {
+    const size = 200
     return (
-      <button className='Grid-box'
-      style={buttonStyle}
-      onClick={()=> this.handleClick()}
-      
-      >{`${this.state.r},${this.state.g},${this.state.r}`}</button>
+      <div className='App'>
+        <header className='App-header'>
+          <img src={logo} className='App-logo' alt='logo' />
+          <h1 className='App-title'>Welcome to Graina</h1>
+        </header>
+        <Grid size={size} data={this.state.data}/>
+      </div>
     )
   }
 }
-
-class App extends React.Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <svg witdh="100" height="100">
-            <circle 
-              cx="50"
-              cy="50"
-              r="50"
-              stroke={`rgb(50,0,100)`}
-              stroke-witdh="4"
-              fill={`rgb(50,0,100)`}
-              />
-          </svg>
-          <h1 className="App-title">Welcome to Graina</h1>
-        </header>
-        <Box/>
-      </div>
-    );
-  }
-}
-
-export default App;
