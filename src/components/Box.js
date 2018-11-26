@@ -1,5 +1,5 @@
 import React from 'react'
-import './Box.css'
+import style from './Box.css'
 
 
   

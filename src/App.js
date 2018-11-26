@@ -1,7 +1,7 @@
 import React from 'react'
 import Grid from './components/Grid'
 import logo from './logo.svg'
-import './App.css'
+import style from './App.css'
 
 
 const testGrains = [

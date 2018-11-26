@@ -11,23 +11,14 @@ module.exports = {
         },
         {
           test: /\.css$/,
-          loader: 'style-loader'
-        }, {
-          test: /\.css$/,
-          loader: 'css-loader',
-          query: {
-            modules: true,
-            localIdentName: '[name]__[local]___[hash:base64:5]'
-          }
+          use: [
+            { loader: "style-loader" },
+            { loader: "css-loader" }
+          ]
         },
         {
-          test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2|json|xml|ico)$/,
-          loader: 'file-loader',
-          query: {
-              outputPath: 'assets/',
-              publicPath: 'http://localhost:8080/',
-              emitFile: true
-          }
+          test: /.(jpg|jpeg|png|svg)$/,
+          use: ['file-loader'],
         }
       ]
     },
