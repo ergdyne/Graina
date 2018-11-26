@@ -1,10 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './App'
+import './index.css'
 
-const title = 'A Nothing App, Really'
+
+
 
 ReactDOM.render(
-  <div>{title}</div>,
+  <App />, 
   document.getElementById('app')
 )
 
