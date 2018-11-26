@@ -9,6 +9,7 @@ function xCord(i){
   if(i===2||i===3){return 3}
   return 2
 }
+
 function yCord(i){
   if(i===0||i===3){return 1}
   if(i===1||i===2){return 3}

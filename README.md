@@ -1,2 +1,1 @@
-# Graina
-Simple React Game
+Simple display for Simple "Game."
