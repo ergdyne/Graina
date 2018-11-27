@@ -1,30 +1,15 @@
 import React from 'react'
-
-function grainToRGB(grain){
-  return `rgb(${grain.color.r},${grain.color.g},${grain.color.b})`
-}
-
-function xCord(i){
-  if(i===0||i===1){return 1}
-  if(i===2||i===3){return 3}
-  return 2
-}
-
-function yCord(i){
-  if(i===0||i===3){return 1}
-  if(i===1||i===2){return 3}
-  return 2
-}
+import {grainToRGB, xCoord, yCoord} from './grainImageLib'
 
 export default function grainImage(imageSize, grains){
-  const radius = imageSize/4
+  const radius = imageSize/(2+2*Math.sqrt(2))
   console.log(grains)
   const circles = grains.map((g,i)=>{
     return(
       <circle
         key={i} 
-        cx={xCord(i)*radius}
-        cy={yCord(i)*radius}
+        cx={xCoord(i)*radius}
+        cy={yCoord(i)*radius}
         r={i>3 ? 1:radius}
         fill={grainToRGB(g)}
       />
