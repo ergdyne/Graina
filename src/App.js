@@ -28,7 +28,3 @@ export default class App extends React.Component {
     )
   }
 }
-
-//a div is always rendered, which contains everything else
-//the header has an image that is loaded
-//a Grid is rendered and has size and data
