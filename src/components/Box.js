@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import style from './Box.css'
 
 export default class Box extends React.Component {
@@ -12,4 +13,9 @@ export default class Box extends React.Component {
       </button>
     )
   }
+}
+
+Box.propTypes = {
+  size: PropTypes.number,
+  image: PropTypes.element
 }

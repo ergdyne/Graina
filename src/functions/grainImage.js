@@ -3,7 +3,6 @@ import {grainToRGB, xCoord, yCoord} from './grainImageLib'
 
 export default function grainImage(imageSize, grains){
   const radius = imageSize/(2+2*Math.sqrt(2))
-  console.log(grains)
   const circles = grains.map((g,i)=>{
     return(
       <circle

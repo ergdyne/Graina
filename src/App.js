@@ -8,22 +8,27 @@ export default class App extends React.Component {
   constructor(){
     super()
     this.state={
-      data:[]
+      data:[],
+      size:100
     }
   }
   componentDidMount(){
     this.setState({data:testGrid()})
+    this.setState({size:150})
   }
   render() {
-    const size = 200
     return (
       <div className='App'>
         <header className='App-header'>
           <img src={logo} className='App-logo' alt='logo' />
           <h1 className='App-title'>Welcome to Graina</h1>
         </header>
-        <Grid size={size} data={this.state.data}/>
+        <Grid size={this.state.size} data={this.state.data}/>
       </div>
     )
   }
 }
+
+//a div is always rendered, which contains everything else
+//the header has an image that is loaded
+//a Grid is rendered and has size and data

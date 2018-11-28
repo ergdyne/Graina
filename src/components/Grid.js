@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Box from './Box'
 import grainImage from '../functions/grainImage'
 
@@ -19,4 +20,9 @@ export default class Grid extends React.Component{
       </div>
     )
   }
+}
+
+Grid.propTypes = {
+  size: PropTypes.number,
+  data: PropTypes.arrayOf(PropTypes.object)
 }
