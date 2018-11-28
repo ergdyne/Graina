@@ -1,8 +1,6 @@
 import React from 'react'
 import style from './Box.css'
 
-
-  
 export default class Box extends React.Component {
   render(){
     return (

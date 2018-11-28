@@ -5,7 +5,6 @@ import grainImage from '../functions/grainImage'
 export default class Grid extends React.Component{
   //Grid made of Rows made of Boxes
   render(){
-    console.log(this.props.data)
     return (
       <div>
         {this.props.data.map((b)=>{
@@ -17,9 +16,7 @@ export default class Grid extends React.Component{
           )
         })
       }
-
       </div>
-      
     )
   }
 }
