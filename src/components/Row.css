@@ -1,8 +1,5 @@
 .Row {
   overflow: auto;
-  float: left;
-  margin-right: 1px;
-  margin-top: 1px;
   padding: 0;
   text-align: center;
   overflow: hidden;

@@ -1,20 +1,29 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Row from './Row'
-import grainImage from '../functions/grainImage'
+import {range, rangeLength } from '../functions/rangeLib';
+import { findRow } from '../functions/cellData';
 
 export default class Grid extends React.Component{
   //Grid made of Rows made of Cells
   render(){
+    const start = this.props.yStart
+
     return (
-      <div>
-        <Row
-          size={this.props.size} 
-          data={this.props.data}
-          xEnd={this.props.xEnd}
-          xStart={this.props.xStart}
-          y={0}
-        />
+      <div className='Grid'>
+        {range(rangeLength(start, this.props.yEnd),start,1).reverse()
+          .map((row)=>{
+            return(
+              <Row
+                size={this.props.size} 
+                data={findRow(row,this.props.data)}
+                xEnd={this.props.xEnd}
+                xStart={this.props.xStart}
+                y={row}
+              />
+            )
+          })
+        }
       </div>
     )
   }
