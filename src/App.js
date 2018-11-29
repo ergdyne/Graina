@@ -9,7 +9,12 @@ export default class App extends React.Component {
     super()
     this.state={
       data:[],
-      size:100
+      size:100,
+      //will auto configure based on center and settings
+      xStart:0,
+      xEnd:2,
+      yStart:0,
+      yEnd:2
     }
   }
   componentDidMount(){
@@ -23,7 +28,14 @@ export default class App extends React.Component {
           <img src={logo} className='App-logo' alt='logo' />
           <h1 className='App-title'>Welcome to Graina</h1>
         </header>
-        <Grid size={this.state.size} data={this.state.data}/>
+        <Grid 
+          size={this.state.size} 
+          data={this.state.data}
+          xStart={this.state.xStart}
+          xEnd={this.state.xEnd}
+          yStart={this.state.yStart}
+          yEnd={this.state.yEnd}
+        />
       </div>
     )
   }

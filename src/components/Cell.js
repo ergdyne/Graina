@@ -16,6 +16,8 @@ export default class Cell extends React.Component {
 }
 
 Cell.propTypes = {
-  size: PropTypes.number,
-  image: PropTypes.element
+  size: PropTypes.number.isRequired,
+  image: PropTypes.element,
+  x: PropTypes.number.isRequired,
+  y: PropTypes.number.isRequired
 }

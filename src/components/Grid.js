@@ -8,13 +8,23 @@ export default class Grid extends React.Component{
   render(){
     return (
       <div>
-        <Row size={this.props.size} data={this.props.data}/>
+        <Row
+          size={this.props.size} 
+          data={this.props.data}
+          xEnd={this.props.xEnd}
+          xStart={this.props.xStart}
+          y={0}
+        />
       </div>
     )
   }
 }
 
 Grid.propTypes = {
-  size: PropTypes.number,
-  data: PropTypes.arrayOf(PropTypes.object)
+  size: PropTypes.number.isRequired,
+  data: PropTypes.arrayOf(PropTypes.object),
+  xStart: PropTypes.number.isRequired,
+  xEnd: PropTypes.number.isRequired,
+  yStart: PropTypes.number.isRequired,
+  yEnd: PropTypes.number.isRequired
 }
