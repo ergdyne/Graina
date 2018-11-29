@@ -12,7 +12,7 @@ describe("Row", ()=>{
   const longRow = shallow(<Row data={testRow} y={0} size={150} xStart={0} xEnd={2}/>)
   
   describe("display qualities",()=>{
-    it("number of cells matches input",()=>{
+    it("number of cells matches height",()=>{
       expect(row.find(Cell).length).to.equal(3)
     })
     it("when less data, number of cells matches width",()=>{

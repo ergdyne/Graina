@@ -1,31 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Cell from './Cell'
-import findCellData from '../functions/getCellData'
 import grainImage from '../functions/grainImage'
+import {findCell} from '../functions/cellData'
+import {range, rangeLength} from '../functions/rangeLib'
 import style from './Row.css'
 
 export default class Row extends React.Component{
   //Row made of cells 
   render(){
     //breakable depending on padding...
-    const cols = (this.props.xEnd - this.props.xStart + 1)
-    const rowWidth = (this.props.size + 1)*cols
+    const start = this.props.xStart
     const y = this.props.y
+    const size = this.props.size
+    const cols = rangeLength(start,this.props.xEnd)
+    const rowWidth = (size + 1)*cols
+    
     return (
       <div 
         className='Row'
         style={{width: `${rowWidth}px`}}
       >
-        {Array.from({length: cols}, (_, k) => k + this.props.xStart).map((i)=>{
-          const cell = findCellData(i,y,this.props.data) 
+        {range(cols, start,1).map((i)=>{
+          const cell = findCell(i,y,this.props.data) 
           return(
             <Cell 
               key={`${cell.x},${cell.y}`}
               x={cell.x}
               y={cell.y}
-              size={this.props.size} 
-              image={grainImage(this.props.size,cell.grains)}/>
+              size={size} 
+              image={grainImage(size,cell.grains)}/>
           )
         })
       }

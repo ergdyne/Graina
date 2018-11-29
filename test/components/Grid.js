@@ -9,18 +9,46 @@ describe("Grid",()=>{
   const grid = 
     shallow(
       <Grid 
+        data={testGrid().slice(0,8)} 
+        size={150}
+        xStart={0}
+        xEnd={2}
+        yStart={0}
+        yEnd={2}
+      />
+    )
+
+  const longGrid = 
+    shallow(
+      <Grid 
         data={testGrid()} 
         size={150}
         xStart={0}
-        xEnd={3}
+        xEnd={2}
         yStart={0}
-        yEnd={3}
+        yEnd={2}
       />
     )
-    it("blank",() => {expect(1).to.equal(1)})
+  const shortGrid = 
+    shallow(
+      <Grid 
+        data={testGrid().slice(0,6)} 
+        size={150}
+        xStart={0}
+        xEnd={2}
+        yStart={0}
+        yEnd={2}
+      />
+    )
+  describe("display qualities",()=>{
+    it("number of rows matches height",()=>{
+      expect(grid.find(Row).length).to.equal(3)
+    })
+    it("when less data, number of rows matches height",()=>{
+      expect(shortGrid.find(Row).length).to.equal(3)
+    })
+    it("when more data, number of rows matches height",()=>{
+      expect(longGrid.find(Row).length).to.equal(3)
+    })
+  })
 })
-
-//Grid takes in data and size(better name?)
-//determines number of rows (unique y)
-//determines number of columns
-//row should probaby have a set number of columns
