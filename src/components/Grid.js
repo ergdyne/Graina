@@ -1,22 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Box from './Box'
+import Row from './Row'
 import grainImage from '../functions/grainImage'
 
 export default class Grid extends React.Component{
-  //Grid made of Rows made of Boxes
+  //Grid made of Rows made of Cells
   render(){
     return (
       <div>
-        {this.props.data.map((b)=>{
-          return(
-            <Box 
-              key={`${b.x},${b.y}`}
-              size={this.props.size} 
-              image={grainImage(this.props.size,b.grains)}/>
-          )
-        })
-      }
+        <Row size={this.props.size} data={this.props.data}/>
       </div>
     )
   }

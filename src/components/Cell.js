@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import style from './Box.css'
+import style from './Cell.css'
 
-export default class Box extends React.Component {
+export default class Cell extends React.Component {
   render(){
     return (
       <button 
-        className='Box'
+        className='Cell'
         style={{width: this.props.size, height: this.props.size}}
       >
         {this.props.image}
@@ -15,7 +15,7 @@ export default class Box extends React.Component {
   }
 }
 
-Box.propTypes = {
+Cell.propTypes = {
   size: PropTypes.number,
   image: PropTypes.element
 }

@@ -1,4 +1,4 @@
-.Box {
+.Cell {
     background: #fff;
     border: 1px solid #999;
     float: left;
@@ -11,6 +11,6 @@
     text-align: center;
   }
   
-  .Box:focus {
+  .Cell:focus {
     outline: none;
   }

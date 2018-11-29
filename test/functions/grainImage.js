@@ -1,17 +1,8 @@
-import React from 'react'
 import {expect} from 'chai'
 import {shallow} from 'enzyme'
-import {grainToRGB, xCoord, yCoord} from '../../src/functions/grainImageLib'
+import {grainToRGB} from '../../src/functions/grainImageLib'
 import grainImage from '../../src/functions/grainImage'
-
-//intentionally too many grains
-const testGrains = [
-  {color:{r:255,g:0,b:255}},
-  {color:{r:0,g:0,b:255}},
-  {color:{r:0,g:255,b:0}},
-  {color:{r:255,g:0,b:0}},
-  {color:{r:255,g:0,b:0}}
-]
+import testGrains from '../../test_data/testGrains'
 
 describe("Grain Image", ()=>{
   describe("functions work as expected", ()=>{
@@ -24,7 +15,7 @@ describe("Grain Image", ()=>{
   })
 
   describe("grainImage returns expected image",()=>{
-    const image = shallow(grainImage(200,testGrains))
+    const image = shallow(grainImage(200,testGrains()))
     it("returns a single svg",()=>{
       expect(image.find("svg").length).to.equal(1)
     })

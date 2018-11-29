@@ -2,7 +2,7 @@ import React from 'react'
 import Grid from './components/Grid'
 import style from './App.css'
 import logo from './logo.svg'
-import testGrid from '../test_data/grid'
+import testGrid from '../test_data/testGrid'
 
 export default class App extends React.Component {
   constructor(){
