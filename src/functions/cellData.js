@@ -15,7 +15,10 @@ function findRow(y,cells){
 
 //the max distance of x and y
 function distance(x,y,cell){
-  return Math.max([Math.abs(cell.x-x),Math.abs(cell.y-y)])
+  const xDist = Math.abs(cell.x-x)
+  const yDist = Math.abs(cell.y-y)
+  if(xDist>yDist){return xDist}
+  return yDist
 }
 
-export {findCell, findRow}
+export {findCell, findRow,distance}

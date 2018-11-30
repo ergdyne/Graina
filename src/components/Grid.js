@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Row from './Row'
-import {range, rangeLength } from '../functions/rangeLib';
-import { findRow } from '../functions/cellData';
+import {range, rangeLength } from '../functions/rangeLib'
+import { findRow } from '../functions/cellData'
 
 export default class Grid extends React.Component{
   //Grid made of Rows made of Cells
