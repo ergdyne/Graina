@@ -11,3 +11,5 @@ describe("Cell", ()=>{
     })
   })
 })
+
+//TODO sinon and onclicks

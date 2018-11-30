@@ -15,11 +15,13 @@ export default class Grid extends React.Component{
           .map((row)=>{
             return(
               <Row
+                key={`${row}`}
                 size={this.props.size} 
                 data={findRow(row,this.props.data)}
                 xEnd={this.props.xEnd}
                 xStart={this.props.xStart}
                 y={row}
+                click={this.props.click}
               />
             )
           })

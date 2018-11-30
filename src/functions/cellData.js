@@ -13,4 +13,9 @@ function findRow(y,cells){
   return cells.filter(c=>{return(c.y===y)})
 }
 
+//the max distance of x and y
+function distance(x,y,cell){
+  return Math.max([Math.abs(cell.x-x),Math.abs(cell.y-y)])
+}
+
 export {findCell, findRow}

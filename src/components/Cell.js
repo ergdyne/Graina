@@ -5,7 +5,8 @@ import style from './Cell.css'
 export default class Cell extends React.Component {
   render(){
     return (
-      <button 
+      <button
+        onClick={()=>this.props.click()}
         className='Cell'
         style={{width: this.props.size, height: this.props.size}}
       >

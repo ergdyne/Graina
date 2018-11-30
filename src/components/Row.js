@@ -29,7 +29,9 @@ export default class Row extends React.Component{
               x={cell.x}
               y={cell.y}
               size={size} 
-              image={grainImage(size,cell.grains)}/>
+              image={grainImage(size,cell.grains)}
+              click={()=>this.props.click(cell)}  
+            />
           )
         })
       }
@@ -43,5 +45,6 @@ Row.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
   xStart: PropTypes.number.isRequired,
   xEnd: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired
+  y: PropTypes.number.isRequired,
+  click: PropTypes.func.isRequired
 }
