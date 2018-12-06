@@ -1,8 +1,8 @@
 import React from 'react'
 import {expect} from 'chai'
 import {shallow} from 'enzyme'
-import Row from '../../src/components/Row'
-import Cell from '../../src/components/Cell'
+import Row from '../../client/components/Row'
+import Cell from '../../client/components/Cell'
 import testGrid from '../../test_data/testGrid'
 
 describe("Row", ()=>{

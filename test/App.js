@@ -2,8 +2,8 @@ import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import {configure, shallow} from 'enzyme'
 import {expect} from 'chai'
-import App from '../src/App'
-import Grid from '../src/components/Grid'
+import App from '../client/App'
+import Grid from '../client/components/Grid'
 
 configure({adapter: new Adapter()})
 

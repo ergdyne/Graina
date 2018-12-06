@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {gridProps} from '../../src/functions/gridMath'
+import {gridProps} from '../../client/functions/gridMath'
 
 describe("gridMath", ()=>{
   describe("gridProps works as expected", ()=>{
