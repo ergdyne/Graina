@@ -8,7 +8,7 @@ import style from './index.css'
 
 
 ReactDOM.render(
-  <App />, 
+  <App/>, 
   document.getElementById('app')
 )
 registerServiceWorker();
