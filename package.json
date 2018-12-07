@@ -6,6 +6,7 @@
   "scripts": {
     "start": "npm run test && npm run start-client",
     "start-client": "webpack-dev-server --config ./webpack.config.js --mode development",
+    "start-server": "nodemon --exec babel-node ./server/server.js",
     "test": "mocha --require jsdomSetup.js --require @babel/register --require ignore-styles --recursive",
     "build": "webpack --config ./webpack.config.js --mode production"
   },
@@ -22,7 +23,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0",
     "@babel/core": "^7.1.6",
+    "@babel/node": "^7.2.0",
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
@@ -35,6 +38,7 @@
     "ignore-styles": "^5.0.1",
     "jsdom": "^13.0.0",
     "mocha": "^5.2.0",
+    "nodemon": "^1.18.7",
     "prop-types": "^15.6.2",
     "react-hot-loader": "^4.3.12",
     "style-loader": "^0.23.1",
@@ -44,6 +48,12 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "pg": "^7.7.1",
+    "pg-hstore": "^2.3.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   }
