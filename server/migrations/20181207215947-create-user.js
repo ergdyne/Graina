@@ -23,6 +23,7 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        //set postgres to handle the timestamping
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       }
     });

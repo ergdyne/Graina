@@ -4,7 +4,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     r: {
       type: DataTypes.SMALLINT,
@@ -18,7 +18,12 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.SMALLINT,
       allowNull: false,
     },
-  }, {})
+    //here to allow read
+    createdAt: {
+      allowNull: true,
+      type: DataTypes.DATE
+    }
+  }, {freezeTableName: true,timestamps: false})
   User.associate = function(models) {
     // associations can be defined here
   }
