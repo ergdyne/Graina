@@ -27,5 +27,5 @@ export default (sequelize, DataTypes) => {
   GrainLocation.associate = function(models) {
     // associations can be defined here
   }
-  return GrainLocation;
+  return GrainLocation
 }

@@ -23,5 +23,5 @@ export default (sequelize, DataTypes) => {
   Grain.associate = function(models) {
     // associations can be defined here
   }
-  return Grain;
+  return Grain
 }

@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const play = sequelize.define('play', {
+  const Play = sequelize.define('play', {
     pk_play:{
       allowNull: false,
       autoIncrement: true,
@@ -24,8 +24,8 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.DATE
     }
   }, {freezeTableName: true,timestamps: false})
-  play.associate = function(models) {
+  Play.associate = function(models) {
     // associations can be defined here
   }
-  return play;
+  return Play
 }
