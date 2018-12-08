@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-  const Move = sequelize.define('move', {
-    pk_move:{
+  const play = sequelize.define('play', {
+    pk_play:{
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
@@ -24,8 +24,8 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.DATE
     }
   }, {freezeTableName: true,timestamps: false})
-  Move.associate = function(models) {
+  play.associate = function(models) {
     // associations can be defined here
   }
-  return Move;
+  return play;
 }

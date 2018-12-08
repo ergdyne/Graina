@@ -1,8 +1,8 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('move', {
-      pk_move: {
+    return queryInterface.createTable('play', {
+      pk_play: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -29,6 +29,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('move');
+    return queryInterface.dropTable('play');
   }
 };
