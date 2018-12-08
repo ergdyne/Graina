@@ -1,8 +1,8 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Grain', {
-      pkGrain: {
+    return queryInterface.createTable('grain', {
+      pk_grain: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -13,11 +13,11 @@ module.exports = {
         type: Sequelize.STRING,
         defaultValue:''
       },
-      fkUser: {
+      fk_player: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
         //set postgres to handle the timestamping
@@ -26,6 +26,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Grain');
+    return queryInterface.dropTable('grain');
   }
 };

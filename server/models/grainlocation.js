@@ -1,12 +1,12 @@
 export default (sequelize, DataTypes) => {
-  const GrainLocation = sequelize.define('GrainLocation', {
-    pkGrainLocation:{
+  const GrainLocation = sequelize.define('grain_location', {
+    pk_grain_location:{
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    fkGrain: {
+    fk_grain: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -19,7 +19,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
     },
     //here to allow read
-    createdAt: {
+    created_at: {
       allowNull: true,
       type: DataTypes.DATE
     }

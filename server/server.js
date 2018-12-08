@@ -2,7 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import http from 'http'
-import {user as userController} from './controllers/controllers'
+import {player as playerController} from './controllers/controllers'
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
@@ -15,7 +15,7 @@ app.use(morgan(process.env.NODE_ENV))
 app.use(bodyParser.urlencoded({extended:false}))
 
 //import routes
-app.get('/api', userController.create)
+app.get('/api', playerController.create)
 app.get(
   '*',
   (req,res)=>res.status(200).send({

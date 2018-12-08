@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-  const Grain = sequelize.define('Grain', {
-    pkGrain:{
+  const Grain = sequelize.define('grain', {
+    pk_grain:{
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
@@ -10,12 +10,12 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    fkUser: {
+    fk_player: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
     //here to allow read
-    createdAt: {
+    created_at: {
       allowNull: true,
       type: DataTypes.DATE
     }

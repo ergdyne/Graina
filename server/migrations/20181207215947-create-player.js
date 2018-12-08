@@ -1,8 +1,8 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('User', {
-      pkUser: {
+    return queryInterface.createTable('player', {
+      pk_player: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -20,7 +20,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.SMALLINT
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE,
         //set postgres to handle the timestamping
@@ -29,6 +29,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('User');
+    return queryInterface.dropTable('player');
   }
 };

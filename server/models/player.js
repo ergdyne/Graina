@@ -1,6 +1,6 @@
 export default (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    pkUser:{
+  const Player = sequelize.define('player', {
+    pk_player:{
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
@@ -19,13 +19,13 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
     },
     //here to allow read
-    createdAt: {
+    created_at: {
       allowNull: true,
       type: DataTypes.DATE
     }
   }, {freezeTableName: true,timestamps: false})
-  User.associate = function(models) {
+  Player.associate = function(models) {
     // associations can be defined here
   }
-  return User;
+  return Player;
 }

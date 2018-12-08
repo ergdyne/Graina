@@ -1,5 +1,5 @@
-import user from './user'
+import player from './player'
 
 export {
-  user
+  player
 }

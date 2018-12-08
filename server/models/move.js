@@ -1,12 +1,12 @@
 export default (sequelize, DataTypes) => {
-  const Move = sequelize.define('Move', {
-    pkMove:{
+  const Move = sequelize.define('move', {
+    pk_move:{
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    fkUser: {
+    fk_player: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -19,7 +19,7 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
     },
     //here to allow read
-    createdAt: {
+    created_at: {
       allowNull: true,
       type: DataTypes.DATE
     }
