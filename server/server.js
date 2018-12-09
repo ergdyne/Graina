@@ -14,8 +14,9 @@ console.log(testSettings())
 
 const app = express()
 app.use(morgan(process.env.NODE_ENV))
-app.use(bodyParser.urlencoded({extended:false}))
-
+//app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 //import routes
 require('./routes/routes')(app)
 

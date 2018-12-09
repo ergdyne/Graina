@@ -1,6 +1,7 @@
 import React from 'react'
 import Grid from './components/Grid'
 import { distance} from './functions/cellData'
+import {gridProps} from './functions/gridMath'
 import style from './App.css'
 import logo from './logo.svg'
 //TEMP
@@ -19,6 +20,7 @@ export default class App extends React.Component {
       yEnd:4,
       //load from db...
       user:{
+        pk:1,
         x:2,
         y:2,
         clicks:1000
@@ -35,23 +37,37 @@ export default class App extends React.Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  updateGrid(props){
+  updateGrid(){
+    fetch(`/api/grid/${this.state.user.pk}`)
+    .then(res => {return res.json()})
+    .then(gs=>{
+      this.setState({data:grainStateToGrid(gs)})
+    })
+
+    const grid = gridProps(this.state.gridXSize, this.state.gridYSize, this.state.user.x,this.state.user.y)
     this.setState({
-      xStart:props.xStart,
-      xEnd:props.xEnd,
-      yStart:props.yStart,
-      yEnd:props.yEnd
+      xStart:grid.xStart,
+      xEnd:grid.xEnd,
+      yStart:grid.yStart,
+      yEnd:grid.yEnd
     })
   }
 
-  updateUser(x,y){
-    this.setState({
-      user:{
-        x: x,
-        y: y,
-        clicks: (this.state.user.clicks)
-      }
+  updateUser(){
+    fetch(`/api/player_data/${this.state.user.pk}`)
+    .then(res => {return res.json()})
+    .then(p => { 
+      this.setState({
+        user:{
+          pk:(this.state.user.pk),
+          x: p.x,
+          y: p.y,
+          clicks: (this.state.user.clicks)
+        }
+      })
+      this.updateGrid()
     })
+    
   }
 
   componentDidUpdate(){
@@ -67,27 +83,23 @@ export default class App extends React.Component {
         console.log("grain would be placed")
       }else{console.log("no grain placed")}
     }else{
-      console.log("trying to move")
-      const move = distance(this.state.user.x, this.state.user.y,cell)
-      if(move*this.state.moveCost <= this.state.user.clicks){
-        console.log("move")
-      }
+      fetch(`/api/play/${this.state.user.pk}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          x: cell.x,
+          y: cell.y,
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      })
+      .then(_ => this.updateUser())
     } 
   }
 
   componentWillMount(){
-    fetch('/api/player_data/1')
-      .then(res => {return res.json()})
-      .then(p => { 
-        console.log(p)
-        this.updateUser(p.x,p.y)
-        console.log(this.state.user)
-      })
-    fetch('/api/grid/1')
-    .then(res => {return res.json()})
-    .then(gs=>{
-      this.setState({data:grainStateToGrid(gs)})
-    })    
+    this.updateUser()
     this.setState({size:50})
   }
 
