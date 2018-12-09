@@ -9,11 +9,7 @@ module.exports={
     const settings = testSettings()
     const pkPlayer = parseInt(req.params.pk_player)||0
     return player_data
-      .findOne({
-        where:{
-          pk_player: pkPlayer
-        }
-      })
+      .findOne({where:{pk_player: pkPlayer}})
       .then(p => {
         const player = p.toJSON()
         const grid = gridProps(settings.grid_size_x,settings.grid_size_y,player.x,player.y)

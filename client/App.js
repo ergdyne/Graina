@@ -20,7 +20,7 @@ export default class App extends React.Component {
       yEnd:4,
       //load from db...
       user:{
-        pk:1,
+        pk:4,
         x:2,
         y:2,
         clicks:1000
@@ -79,10 +79,20 @@ export default class App extends React.Component {
     console.log(this.state.user)
     if(cell.x===this.state.user.x && cell.y===this.state.user.y){
       console.log("place grain")
-      if(this.state.user.clicks>=this.state.grainCost){
-        console.log("grain would be placed")
-      }else{console.log("no grain placed")}
+      fetch(`/api/grain/${this.state.user.pk}`, {
+        method: 'POST',
+        body: JSON.stringify({
+          x: cell.x,
+          y: cell.y,
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      })
+      .then(_ => this.updateUser())
     }else{
+      console.log('move')
       fetch(`/api/play/${this.state.user.pk}`, {
         method: 'POST',
         body: JSON.stringify({
