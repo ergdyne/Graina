@@ -1,0 +1,8 @@
+#For migrate: delete this line, add in data and rename config.json
+{
+  "username":"",
+  "password":"",
+  "database":"",
+  "host":"127.0.0.1",
+  "dialect":"postgres"
+}
