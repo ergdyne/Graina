@@ -31,9 +31,6 @@ describe("App component", ()=>{
       it("has size passed",()=>{
         expect(grid.props().size).to.be.above(0)
       })
-      it("has data passed", ()=>{
-        expect(grid.props().data.length).to.be.above(0)
-      })
     })
   })
 })
