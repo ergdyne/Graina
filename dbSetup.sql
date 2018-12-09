@@ -1,5 +1,5 @@
 create view grain_state as
-select pk_grain, signal, r, g, b, x, y, last_date from
+select pk_grain, signal, r, g, b, x, y, last_date, g.created_at from
   grain as g
   inner join player on player.pk_player = g.fk_player
   inner join 
