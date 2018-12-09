@@ -1,4 +1,5 @@
 import {grain, grain_location, player_data} from '../models/models'
+import grainFlow from '../operations/grainFlow'
 //TODO do something like transactions or include relationships fully in models
 module.exports={
   create(req,res){
@@ -24,7 +25,10 @@ module.exports={
               x: cellX,
               y: cellY
           })
-          .then(r=>res.status(201).send(r))
+          .then(r=>{
+            res.status(201).send(r)
+            grainFlow(1)
+          })
         })
       }
     })
