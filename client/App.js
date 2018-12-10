@@ -1,11 +1,11 @@
 import React from 'react'
 import Grid from './components/Grid'
 import { distance} from './functions/cellData'
-import {gridProps} from './functions/gridMath'
+import {gridProps} from '../common/functions/gridMath'
 import style from './App.css'
 import logo from './logo.svg'
 //TEMP
-import grainStateToGrid from './functions/grainStateToGrid'
+import grainStateToGrid from '../common/functions/grainStateToGrid'
 
 export default class App extends React.Component {
   constructor(){
@@ -18,7 +18,7 @@ export default class App extends React.Component {
       yStart:0,
       yEnd:4,
       user:{
-        pk:2,
+        pk:3,
         x:2,
         y:2
       },

@@ -1,9 +1,9 @@
 import React from 'react'
 import {expect} from 'chai'
 import {shallow} from 'enzyme'
-import Grid from '../../client/components/Grid'
-import Row from '../../client/components/Row'
-import testGrid from '../../test_data/testGrid'
+import Grid from '../../../client/components/Grid'
+import Row from '../../../client/components/Row'
+import testGrid from '../../../common/test_data/testGrid'
 
 describe("Grid",()=>{
   const grid = 

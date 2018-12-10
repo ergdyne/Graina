@@ -25,6 +25,9 @@ export default (sequelize, DataTypes) =>{
     },
     last_date: {
       type: DataTypes.DATE
+    },
+    created_at: {
+      type: DataTypes.DATE
     }
   }, {freezeTableName: true,timestamps: false})
   return GrainState

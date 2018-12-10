@@ -9,6 +9,6 @@ export default function grainStateToGrid(grainState){
   return coords.map(c=>({
     x:c.x,
     y:c.y,
-    grains:(grainState.filter(g=>g.x===c.x&&g.y===c.y).map(g=>({color:{r:g.r,g:g.g,b:g.b}})))
+    grains:(grainState.filter(g=>g.x===c.x&&g.y===c.y).map(g=>({fk_grain:g.pk_grain,color:{r:g.r,g:g.g,b:g.b}})))
   }))
 }
