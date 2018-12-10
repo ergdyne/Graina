@@ -1,5 +1,5 @@
 create view grain_state as
-select pk_grain, signal, r, g, b, x, y, last_date from
+select pk_grain, signal, r, g, b, x, y, last_date, g.created_at from
   grain as g
   inner join player on player.pk_player = g.fk_player
   inner join 
@@ -27,24 +27,14 @@ player
 inner join player_location
 on pk_player = fk_player;
 
-create or replace function nth_grain(xC integer, yC integer, n integer) returns timestamp as $nthDate$
-declare nthDate timestamp;
-begin
-  select last_date into nthDate from
-  grain_state as gs
-  where gs.x=xC and gs.y=yC
-  order by last_date
-  limit 1
-  offset n-1;
-return nthDate;
-end;
-$nthDate$ language plpgsql;
-
-create view oldest_fifth_grain as
+create view fifth_grain as
   select x,y from 
     (select x, y, count(*) as n from 
       grain_state group by x, y
     ) as g 
-  where n > 4
-  order by nth_grain(x,y,5)
-  limit 1;
+  where n > 4;
+
+create view move_grain as
+  select pk_grain, x, y from grain_state
+  where (x,y) in (select x,y from fifth_grain)
+  order by x,y,last_date;

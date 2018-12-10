@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize'
 import {grain_state,player_data} from '../models/models'
-import {gridProps} from '../functions/gridMath'
-import testSettings from '../../test_data/testSettings'
+import {gridProps} from '../../common/functions/gridMath'
+import testSettings from '../../common/test_data/testSettings'
 const Op = Sequelize.Op
 
 module.exports={

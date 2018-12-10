@@ -1,8 +1,8 @@
 import {expect} from 'chai'
 import {shallow} from 'enzyme'
-import {grainToRGB} from '../../client/functions/grainImageLib'
-import grainImage from '../../client/functions/grainImage'
-import testGrains from '../../test_data/testGrains'
+import {grainToRGB} from '../../../client/functions/grainImageLib'
+import grainImage from '../../../client/functions/grainImage'
+import testGrains from '../../../common/test_data/testGrains'
 
 describe("Grain Image", ()=>{
   describe("functions work as expected", ()=>{

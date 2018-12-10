@@ -1,7 +1,7 @@
 import React from 'react'
 import {expect} from 'chai'
 import {shallow} from 'enzyme'
-import Cell from '../../client/components/Cell'
+import Cell from '../../../client/components/Cell'
 
 describe("Cell", ()=>{
   const cell = shallow(<Cell size={150} x={0} y={0}/>)

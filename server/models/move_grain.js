@@ -1,13 +1,16 @@
 export default(sequelize, DataTypes) =>{
   //Read Only
-  const OldestFifthGrain = sequelize.define('oldest_fifth_grain',{
-    x:{
+  const MoveGrain = sequelize.define('move_grain',{
+    pk_grain:{
       primaryKey: true,
+      type: DataTypes.INTEGER
+    },
+    x:{
       type: DataTypes.INTEGER
     },
     y:{
       type: DataTypes.INTEGER
     }
   }, {freezeTableName: true,timestamps: false})
-  return OldestFifthGrain
+  return MoveGrain
 }

@@ -6,7 +6,5 @@ function range(length,start,spacing){
 function rangeLength(start, end){
   return (end - start + 1)
 }
+
 export{range, rangeLength}
-
-
-

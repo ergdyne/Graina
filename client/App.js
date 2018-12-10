@@ -1,39 +1,33 @@
 import React from 'react'
 import Grid from './components/Grid'
 import { distance} from './functions/cellData'
-import {gridProps} from './functions/gridMath'
+import {gridProps} from '../common/functions/gridMath'
 import style from './App.css'
 import logo from './logo.svg'
 //TEMP
-import grainStateToGrid from './functions/grainStateToGrid'
+import grainStateToGrid from '../common/functions/grainStateToGrid'
 
 export default class App extends React.Component {
   constructor(){
     super()
     this.state = {
       data:[],
-      size:100,
-      //will auto configure based on user location and settings
+      size:75,
       xStart:0,
       xEnd:4,
       yStart:0,
       yEnd:4,
-      //load from db...
       user:{
-        pk:4,
+        pk:3,
         x:2,
-        y:2,
-        clicks:1000
+        y:2
       },
-      grainCost: 2,
-      moveCost: 1,
       gridXSize:5,
       gridYSize:5
-
     }
 
-    this.updateGrid = this.updateGrid.bind(this)
     this.updateUser = this.updateUser.bind(this)
+    this.updateGrid = this.updateGrid.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
 
@@ -61,17 +55,11 @@ export default class App extends React.Component {
         user:{
           pk:(this.state.user.pk),
           x: p.x,
-          y: p.y,
-          clicks: (this.state.user.clicks)
+          y: p.y
         }
       })
       this.updateGrid()
     })
-    
-  }
-
-  componentDidUpdate(){
-    
   }
 
   handleClick(cell){
@@ -110,7 +98,6 @@ export default class App extends React.Component {
 
   componentWillMount(){
     this.updateUser()
-    this.setState({size:50})
   }
 
   render() {
