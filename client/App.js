@@ -1,6 +1,6 @@
 import React from 'react'
 import Grid from './components/Grid'
-import { distance} from './functions/cellData'
+import WorldMap from './components/WorldMap'
 import {gridProps} from '../common/functions/gridMath'
 import style from './App.css'
 import logo from './logo.svg'
@@ -12,31 +12,37 @@ export default class App extends React.Component {
     super()
     this.state = {
       data:[],
+      gridXSize:5,
+      gridYSize:5,
       size:75,
-      xStart:0,
-      xEnd:4,
-      yStart:0,
-      yEnd:4,
       user:{
-        pk:3,
+        pk:1,
         x:2,
         y:2
       },
-      gridXSize:5,
-      gridYSize:5
+      worldMapData:[],
+      xStart:0,
+      xEnd:4,
+      yStart:0,
+      yEnd:4
     }
 
-    this.updateUser = this.updateUser.bind(this)
-    this.updateGrid = this.updateGrid.bind(this)
     this.handleClick = this.handleClick.bind(this)
+    this.updateGrid = this.updateGrid.bind(this)
+    this.updateUser = this.updateUser.bind(this)
+    this.updateWorldMap = this.updateWorldMap.bind(this)
+  }
+
+  updateWorldMap(){
+    fetch('/api/world_map/')
+    .then(res => {return res.json()})
+    .then(m=> this.setState({worldMapData:m}))
   }
 
   updateGrid(){
     fetch(`/api/grid/${this.state.user.pk}`)
     .then(res => {return res.json()})
-    .then(gs=>{
-      this.setState({data:grainStateToGrid(gs)})
-    })
+    .then(gs=>{this.setState({data:grainStateToGrid(gs)})})
 
     const grid = gridProps(this.state.gridXSize, this.state.gridYSize, this.state.user.x,this.state.user.y)
     this.setState({
@@ -60,6 +66,8 @@ export default class App extends React.Component {
       })
       this.updateGrid()
     })
+
+    console.log(this.state.user)
   }
 
   handleClick(cell){
@@ -98,6 +106,7 @@ export default class App extends React.Component {
 
   componentWillMount(){
     this.updateUser()
+    this.updateWorldMap()
   }
 
   render() {
@@ -116,6 +125,7 @@ export default class App extends React.Component {
           yEnd={this.state.yEnd}
           click={this.handleClick}
         />
+        <WorldMap data={this.state.worldMapData}/>
       </div>
     )
   }
