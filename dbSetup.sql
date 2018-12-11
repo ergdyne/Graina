@@ -38,3 +38,33 @@ create view move_grain as
   select pk_grain, x, y from grain_state
   where (x,y) in (select x,y from fifth_grain)
   order by x,y,last_date;
+
+create or replace function world_map (d integer)
+  returns table(
+    x integer,
+    y integer,
+    r smallint,
+    g smallint,
+    b smallint
+  ) as $$
+  declare
+    tx integer;
+    ty integer;
+    n integer;
+  begin
+    select 
+      0-lx,
+      0-ly,
+      ceiling((greatest(hx-lx,hy-ly)::decimal/d))
+    into tx,ty,n
+    from 
+      (select max(gs.x) as hx, max(gs.y) as hy, min(gs.x) as lx, min(gs.y) as ly from grain_state as gs) as gsm;
+
+    return query select
+      (gsl.x+tx)/n,(gsl.y+ty)/n,avg(gsl.r)::smallint,avg(gsl.g)::smallint,avg(gsl.b)::smallint
+    from grain_state as gsl
+    group by (gsl.x+tx)/n,(gsl.y+ty)/n;
+  end; $$ language 'plpgsql';
+
+--in honor of Tesla
+create view world_map_420 as select * from world_map(420);
