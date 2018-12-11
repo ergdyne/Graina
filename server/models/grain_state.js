@@ -6,7 +6,6 @@ export default (sequelize, DataTypes) =>{
     },
     signal: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     x: {
       type: DataTypes.INTEGER
