@@ -38,7 +38,7 @@ module.exports = {
       contentBase: './dist',
       hot: true,
       proxy: {
-        '/api': 'http://localhost:8000'
+        '/api': 'https://localhost:8000'
       }
     }
   }

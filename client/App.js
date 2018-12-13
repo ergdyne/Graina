@@ -1,11 +1,15 @@
 import React from 'react'
+import io from 'socket.io-client'
 import Grid from './components/Grid'
 import WorldMap from './components/WorldMap'
+import OAuth from './components/OAuth'
 import {gridProps} from '../common/functions/gridMath'
 import style from './App.css'
 import logo from './logo.svg'
 //TEMP
 import grainStateToGrid from '../common/functions/grainStateToGrid'
+
+const socket = io('https://localhost:8000')
 
 export default class App extends React.Component {
   constructor(){
@@ -15,6 +19,7 @@ export default class App extends React.Component {
       gridXSize:5,
       gridYSize:5,
       size:75,
+      loggedIn:false,
       user:{
         pk:1,
         x:2,
@@ -26,6 +31,7 @@ export default class App extends React.Component {
       yStart:0,
       yEnd:4
     }
+
 
     this.handleClick = this.handleClick.bind(this)
     this.updateGrid = this.updateGrid.bind(this)
@@ -104,10 +110,10 @@ export default class App extends React.Component {
     } 
   }
 
-  componentWillMount(){
-    this.updateUser()
-    this.updateWorldMap()
-  }
+  // componentWillMount(){
+  //   this.updateUser()
+  //   this.updateWorldMap()
+  // }
 
   render() {
     return (
@@ -116,16 +122,24 @@ export default class App extends React.Component {
           <img src={logo} className='App-logo' alt='logo' />
           <h1 className='App-title'>Welcome to Graina</h1>
         </header>
-        <Grid 
-          size={this.state.size} 
-          data={this.state.data}
-          xStart={this.state.xStart}
-          xEnd={this.state.xEnd}
-          yStart={this.state.yStart}
-          yEnd={this.state.yEnd}
-          click={this.handleClick}
-        />
-        <WorldMap data={this.state.worldMapData}/>
+        <div className='App-body'>
+          <OAuth 
+              provider={'google'}
+              key={'google'}
+              apiURL={'https://localhost:8000'}
+              socket={socket}
+            />
+          {/* <Grid 
+            size={this.state.size} 
+            data={this.state.data}
+            xStart={this.state.xStart}
+            xEnd={this.state.xEnd}
+            yStart={this.state.yStart}
+            yEnd={this.state.yEnd}
+            click={this.handleClick}
+          />
+          <WorldMap data={this.state.worldMapData}/>*/}
+        </div> 
       </div>
     )
   }
