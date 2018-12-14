@@ -1,11 +1,13 @@
-
-//TODO try this other places?
+//Since this is used in a route, we are calling it a controller
 export function google(req, res){
   const io = req.app.get('io')
-  const user = {
-    name: req.user.displayName,
-    photo: req.user.photos[0].value.replace(/sZ=50/gi, 'sz=250')
+  //cookie related...
+  console.log("the request to google bit")
+
+  const player = {
+    pkPlayer: req.user.pkPlayer
   }
-  io.in(req.session.socketId).emit('google',user)
+
+  io.in(req.session.socketId).emit('google',player)
   res.end()
 }

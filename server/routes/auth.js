@@ -2,7 +2,6 @@ import passport from 'passport'
 //TODO change to standard
 import {google} from '../controllers/auth'
 
-
 module.exports = (app) => {
   const googleAuth = passport.authenticate('google', {scope:['profile']})
 
@@ -14,5 +13,4 @@ module.exports = (app) => {
   })
 
   app.get('/google', googleAuth)
-
 }

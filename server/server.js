@@ -14,12 +14,10 @@ import {passportConfig} from './operations/passportConfig'
 //TEMP
 import testSettings from '../common/test_data/testSettings'
 const clientOrigin = 'https://localhost:8080'
-
 const certOptions = {
   key: fs.readFileSync(path.resolve('./server.key')),
   cert: fs.readFileSync(path.resolve('./server.crt'))
 }
-
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
