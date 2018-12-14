@@ -9,21 +9,16 @@ export default class OAuth extends Component {
       disabled: ''
   }  
 
-  componentDidUpdate(){
-    console.log("Hey update")
-    console.log(state.user)
-  }
-
   componentDidMount() {
-    console.log(this.props)
     const { socket, provider } = this.props
-
     socket.on(provider, user => {  
       this.popup.close()
-      console.log("socket on user")
+      console.log("everything should work now")
       console.log(user)
       this.setState({user})
+      console.log(this.state)
     })
+
   }
 
   checkPopup() {
@@ -63,20 +58,19 @@ export default class OAuth extends Component {
   }
 
   render() {
-    const { name} = this.state.user
+    const loggedIn = this.state.user.loggedIn
     const { provider } = this.props
-    const { disabled } = this.state
-    
+    console.log("rendering")
+    console.log(loggedIn)
     return (
       <div>
-        {name
+        {loggedIn
           ? <div>       
-              <h4>{`${name}`}</h4>
+              <h4>{'The logged in version'}</h4>
             </div>
           : <div >
               <button 
-                onClick={this.startAuth} 
-                className={`${provider} ${disabled} button`}
+                onClick={this.startAuth}
               >
                 {provider}
               </button>
@@ -87,7 +81,7 @@ export default class OAuth extends Component {
   }
 }
 
-// OAuth.propTypes = {
-//   provider: PropTypes.string.isRequired,
-//   socket: PropTypes.object.isRequired
-// }
+OAuth.propTypes = {
+  provider: PropTypes.string.isRequired,
+  socket: PropTypes.object.isRequired
+}

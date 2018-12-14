@@ -10,8 +10,19 @@ export const passportConfig = () => {
     callbackURL: 'https://localhost:8000/google/callback'
   }
   
-  passport.serializeUser((user, cb)=> cb(null, user))
-  passport.deserializeUser((obj, cb)=> cb(null, obj))
+  passport.serializeUser((user, cb)=> {
+    console.log("serializing user")
+    console.log(user)  
+    cb(null, user.pkPlayer)
+  })
+  passport.deserializeUser((pkPlayer, cb)=> {
+    console.log("deserializing user")
+    console.log(pkPlayer)
+    player
+    .findOne({where:{pk_player:pkPlayer}})
+    .then(p=>cb(null, p))
+    
+  })
 
   const callback = (accessToken, refreshToken, profile, cb) => {
     console.log("calling back from google")
@@ -20,6 +31,7 @@ export const passportConfig = () => {
     .findOne({where:{google_id:profile.id}})
     .then(auth => {
       if(auth){
+        //here and below could just send the pk
         const existingPlayer = {pkPlayer:auth.toJSON().fk_player}
         cb(null, existingPlayer)
       }else{
