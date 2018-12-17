@@ -3,7 +3,7 @@ import grainFlow from '../operations/grainFlow'
 //TODO do something like transactions or include relationships fully in models
 module.exports={
   create(req,res){
-    const pkPlayer = parseInt(req.params.pk_player)||0
+    const pkPlayer = parseInt(req.session.passport.user)||0
     return player_data
     .findOne({where:{pk_player:pkPlayer}})
     .then(p => {

@@ -1,4 +1,4 @@
-function gridProps(gridXSize,gridYSize,userX,userY){
+function gridProps(gridXSize,gridYSize,playerX,playerY){
   //for now assume odd, but with round should work regardless
   function startEnd(size,coord){
     const delta = Math.round((size-1)/2)
@@ -7,8 +7,8 @@ function gridProps(gridXSize,gridYSize,userX,userY){
     return {start:start, end:end}
   }
 
-  const xComp = startEnd(gridXSize,userX)
-  const yComp = startEnd(gridYSize,userY)
+  const xComp = startEnd(gridXSize,playerX)
+  const yComp = startEnd(gridYSize,playerY)
   
   return ({xStart:xComp.start,
       xEnd:xComp.end,

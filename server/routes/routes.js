@@ -8,13 +8,14 @@ import {
 } from '../controllers/controllers'
 
 module.exports = (app) => {
-  app.get('/api/grid/:pk_player', gridController.getRange)
+
+  app.get('/api/grid/', gridController.getRange)
   
-  app.post('/api/grain/:pk_player', grainController.create)
+  app.post('/api/grain/', grainController.create)
 
-  app.post('/api/play/:pk_player',playController.make)
+  app.post('/api/play/',playController.make)
 
-  app.get('/api/player_data/:pk_player', playerDataController.retrieve)
+  app.get('/api/player_data/', playerDataController.retrieve)
 
   app.get('/api/world_map/', worldMapController.retrieve)
 }

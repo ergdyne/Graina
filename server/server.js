@@ -1,24 +1,56 @@
 import express from 'express'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
+import path from 'path'
+import fs from 'fs'
+import https from 'https'
 import http from 'http'
+import passport from 'passport'
+import session from 'express-session'
+import cookieParser from 'cookie-parser'
+import cors from 'cors'
+import socketio from 'socket.io'
+import {passportConfig} from './operations/passportConfig'
+
 //TEMP
 import testSettings from '../common/test_data/testSettings'
+const clientOrigin = 'https://localhost:8080'
+const certOptions = {
+  key: fs.readFileSync(path.resolve('./server.key')),
+  cert: fs.readFileSync(path.resolve('./server.crt'))
+}
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
 }
 
-console.log(process.env.DEV_FLAGGED)
-console.log(testSettings())
-
+//create the server
 const app = express()
+const server = https.createServer(certOptions, app)
+
+
 app.use(morgan(process.env.NODE_ENV))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use(passport.initialize())
+
+
+app.use(cookieParser())
+app.use(cors({origin: clientOrigin,credentials: true}))
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true
+}))
+passportConfig()
+
+const io = socketio(server)
+app.set('io', io)
 
 //import routes
+require('./routes/auth') (app)
 require('./routes/routes')(app)
+
 app.get(
   '*',
   (req,res)=>res.status(200).send({
@@ -28,5 +60,7 @@ app.get(
 //the or here is different from what env is as a temporary test
 const port = parseInt(process.env.PORT,10)||8888
 app.set('port', port)
-const server = http.createServer(app)
+
+console.log(port)
+
 server.listen(port)

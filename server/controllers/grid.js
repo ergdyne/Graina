@@ -7,7 +7,7 @@ const Op = Sequelize.Op
 module.exports={
   getRange(req, res){
     const settings = testSettings()
-    const pkPlayer = parseInt(req.params.pk_player)||0
+    const pkPlayer = parseInt(req.session.passport.user)||0
     return player_data
       .findOne({where:{pk_player: pkPlayer}})
       .then(p => {
