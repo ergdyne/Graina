@@ -5,7 +5,7 @@ import testSettings from '../../common/test_data/testSettings'
 const Op = Sequelize.Op
 
 module.exports={
-  getRange(req, res){
+  retrieve(req, res){
     const settings = testSettings()
     const pkPlayer = parseInt(req.session.passport.user)||0
     return player_data

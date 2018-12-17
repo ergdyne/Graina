@@ -7,31 +7,24 @@ export const passportConfig = () => {
   const googleConfig = {
     clientID: process.env.GOOGLE_KEY,
     clientSecret: process.env.GOOGLE_SECRET,
-    callbackURL: 'https://localhost:8000/google/callback'
+    callbackURL: process.env.GOOGLE_CALLBACK_URL
   }
   
   passport.serializeUser((user, cb)=> {
-    console.log("serializing user")
-    console.log(user)  
     cb(null, user.pkPlayer)
   })
   passport.deserializeUser((pkPlayer, cb)=> {
-    console.log("deserializing user")
-    console.log(pkPlayer)
     player
     .findOne({where:{pk_player:pkPlayer}})
     .then(p=>cb(null, p))
-    
   })
 
   const callback = (accessToken, refreshToken, profile, cb) => {
-    console.log("calling back from google")
     //this is where we will build the player
     auth_google
     .findOne({where:{google_id:profile.id}})
     .then(auth => {
       if(auth){
-        //here and below could just send the pk
         const existingPlayer = {pkPlayer:auth.toJSON().fk_player}
         cb(null, existingPlayer)
       }else{
@@ -56,9 +49,6 @@ export const passportConfig = () => {
         })
       }
     })
-
-    
   }
-
   passport.use(new GoogleStrategy(googleConfig, callback))
 }

@@ -12,14 +12,12 @@ import cors from 'cors'
 import socketio from 'socket.io'
 import {passportConfig} from './operations/passportConfig'
 
-//TEMP
+//TEMP - different set up fro production... not sure what it is yet
 import testSettings from '../common/test_data/testSettings'
-const clientOrigin = 'https://localhost:8080'
 const certOptions = {
   key: fs.readFileSync(path.resolve('./server.key')),
   cert: fs.readFileSync(path.resolve('./server.crt'))
 }
-
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
 }
@@ -36,7 +34,7 @@ app.use(passport.initialize())
 
 
 app.use(cookieParser())
-app.use(cors({origin: clientOrigin,credentials: true}))
+app.use(cors({origin: process.env.CLIENT_ORIGIN,credentials: true}))
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,

@@ -6,15 +6,18 @@ import Row from '../../../client/components/Row'
 import testGrid from '../../../common/test_data/testGrid'
 
 describe("Grid",()=>{
+  const gridProps = {
+    xStart:0,
+    xEnd:2,
+    yStart:0,
+    yEnd:2
+  }
   const grid = 
     shallow(
       <Grid 
         data={testGrid().slice(0,8)} 
         size={150}
-        xStart={0}
-        xEnd={2}
-        yStart={0}
-        yEnd={2}
+        gridProps ={gridProps}
       />
     )
 
@@ -23,10 +26,7 @@ describe("Grid",()=>{
       <Grid 
         data={testGrid()} 
         size={150}
-        xStart={0}
-        xEnd={2}
-        yStart={0}
-        yEnd={2}
+        gridProps ={gridProps}
       />
     )
   const shortGrid = 
@@ -34,10 +34,7 @@ describe("Grid",()=>{
       <Grid 
         data={testGrid().slice(0,6)} 
         size={150}
-        xStart={0}
-        xEnd={2}
-        yStart={0}
-        yEnd={2}
+        gridProps ={gridProps}
       />
     )
   describe("display qualities",()=>{

@@ -9,11 +9,11 @@ import {
 
 module.exports = (app) => {
 
-  app.get('/api/grid/', gridController.getRange)
+  app.get('/api/local_map/', gridController.retrieve)
   
-  app.post('/api/grain/', grainController.create)
+  app.post('/api/place_grain/', grainController.place)
 
-  app.post('/api/play/',playController.make)
+  app.post('/api/move_player/',playController.make)
 
   app.get('/api/player_data/', playerDataController.retrieve)
 

@@ -20,75 +20,57 @@ export default class App extends React.Component {
       gridYSize:5,
       size:75,
       loggedIn:false,
-      user:{
-        pk:1,
-        x:2,
-        y:2
-      },
       worldMapData:[],
-      xStart:0,
-      xEnd:4,
-      yStart:0,
-      yEnd:4
+      player:{},
+      gridProps:{}
     }
-
-
-    this.handleClick = this.handleClick.bind(this)
-    this.updateGrid = this.updateGrid.bind(this)
-    this.updateUser = this.updateUser.bind(this)
-    this.updateWorldMap = this.updateWorldMap.bind(this)
   }
 
-  updateWorldMap(){
+  updateWorldMap = () =>{
+    //TODO this should probably only happen sometimes...
     fetch(`${apiURL}/api/world_map`,{credentials: 'include'})
     .then(res => {return res.json()})
-    .then(m=> this.setState({worldMapData:m}))
+    .then(m=> {
+      this.setState({worldMapData:m})
+      this.forceUpdate()
+    })
   }
 
-  updateGrid(){
-    fetch(`${apiURL}/api/grid/`,{credentials: 'include'})
+  updateGrid = () =>{
+    fetch(`${apiURL}/api/local_map/`,{credentials: 'include'})
     .then(res => {return res.json()})
-    .then(gs=>{this.setState({data:grainStateToGrid(gs)})})
-
-    const grid = gridProps(this.state.gridXSize, this.state.gridYSize, this.state.user.x,this.state.user.y)
-    this.setState({
-      xStart:grid.xStart,
-      xEnd:grid.xEnd,
-      yStart:grid.yStart,
-      yEnd:grid.yEnd
+    .then(gs=>{
+      this.setState({data:grainStateToGrid(gs)})
+      this.setState({
+        gridProps:gridProps(this.state.gridXSize, this.state.gridYSize, this.state.player.x,this.state.player.y)
+      })
     })
   }
 
   logIn = () =>{
-    console.log('logIn triggered')
-    this.setState({loggedIn:true})
-    this.updateUser()
+    this.updatePlayer()
     this.updateWorldMap()
-    this.forceUpdate()
   }
-  updateUser(){
+  updatePlayer = () =>{
     fetch(`${apiURL}/api/player_data/`,{credentials: 'include'})
-    .then(res => {return res.json()})
+    .then(res => {
+      if(res.status === 401){return null}
+      return res.json()})
     .then(p => { 
-      this.setState({
-        user:{
-          pk:(this.state.user.pk),
-          x: p.x,
-          y: p.y
+      if(p){
+        this.setState({loggedIn:true})
+        this.setState({player:p})
+        this.updateGrid()
+        if(this.state.worldMapData.length <1){
+          this.updateWorldMap()
         }
-      })
-      this.updateGrid()
+      }
     })
-
-    console.log(this.state.user)
   }
 
-  handleClick(cell){
-    //temporary code
-    console.log(this.state.user)
-    if(cell.x===this.state.user.x && cell.y===this.state.user.y){
-      console.log("place grain")
-      fetch(`${apiURL}/api/grain/`, {
+  handleClick = (cell) =>{
+    if(cell.x===this.state.player.x && cell.y===this.state.player.y){
+      fetch(`${apiURL}/api/place_grain/`, {
         method: 'POST',
         body: JSON.stringify({
           x: cell.x,
@@ -100,10 +82,12 @@ export default class App extends React.Component {
           'Content-Type': 'application/json'
         },
       })
-      .then(_ => this.updateUser())
+      .then(_ =>{ 
+        this.updateWorldMap()
+        this.updatePlayer()
+      })
     }else{
-      console.log('move')
-      fetch(`${apiURL}/api/play/`, {
+      fetch(`${apiURL}/api/move_player/`, {
         method: 'POST',
         body: JSON.stringify({
           x: cell.x,
@@ -115,22 +99,19 @@ export default class App extends React.Component {
           'Content-Type': 'application/json'
         },
       })
-      .then(_ => this.updateUser())
+      .then(_ => this.updatePlayer())
     } 
   }
 
   componentWillMount(){
     //well do a fetch to check with server?
+    this.updatePlayer()
     if(this.state.loggedIn){
-      this.updateUser()
       this.updateWorldMap()
     }
   }
 
-
-
   render() {
-    console.log('loggedin:' + this.state.loggedIn)
     return (
       <div className='App'>
         <header className='App-header'>
@@ -152,10 +133,7 @@ export default class App extends React.Component {
               <Grid 
                 size={this.state.size} 
                 data={this.state.data}
-                xStart={this.state.xStart}
-                xEnd={this.state.xEnd}
-                yStart={this.state.yStart}
-                yEnd={this.state.yEnd}
+                gridProps={this.state.gridProps}
                 click={this.handleClick}
               />
               <WorldMap data={this.state.worldMapData}/>
