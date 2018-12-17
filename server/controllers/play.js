@@ -5,7 +5,7 @@ module.exports={
     return player_data
       .findOne({
         where:{
-          pk_player: parseInt(req.params.pk_player) || 0
+          pk_player: parseInt(req.session.passport.user) || 0
         }
       })
       .then(p => {
@@ -26,7 +26,7 @@ module.exports={
             return player_data
             .findOne({
               where:{
-                pk_player: parseInt(req.params.pk_player) || 0
+                pk_player: parseInt(req.session.passport.user) || 0
               }
             })
             .then(pd =>{

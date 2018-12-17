@@ -1,5 +1,6 @@
 import {player} from '../models/models'
 
+//uh obsolete
 module.exports={
   create (req, res){
     return player

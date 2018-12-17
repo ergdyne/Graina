@@ -10,13 +10,14 @@ export default class OAuth extends Component {
   }  
 
   componentDidMount() {
-    const { socket, provider } = this.props
-    socket.on(provider, user => {  
+    const { socket, provider, onLogIn} = this.props
+    socket.on(provider, user => { 
+      console.log("socket response")
+      console.log(user) 
       this.popup.close()
-      console.log("everything should work now")
-      console.log(user)
       this.setState({user})
-      console.log(this.state)
+      console.log('logging in user')
+      onLogIn()
     })
 
   }
@@ -37,6 +38,7 @@ export default class OAuth extends Component {
     const left = (window.innerWidth / 2) - (width / 2)
     const top = (window.innerHeight / 2) - (height / 2)
     const url = `${apiURL}/${provider}?socketId=${socket.id}`
+    console.log("opening pop up")
 
     return window.open(url, '',       
       `toolbar=no, location=no, directories=no, status=no, menubar=no, 
@@ -46,6 +48,7 @@ export default class OAuth extends Component {
   }
 
   startAuth = () => {
+    console.log("start auth")
     if (!this.state.disabled) {
       this.popup = this.openPopup()  
       this.checkPopup()
@@ -54,14 +57,14 @@ export default class OAuth extends Component {
   }
 
   closeCard = () => {
+    console.log("close Card")
     this.setState({user: {}})
   }
 
   render() {
     const loggedIn = this.state.user.loggedIn
     const { provider } = this.props
-    console.log("rendering")
-    console.log(loggedIn)
+    
     return (
       <div>
         {loggedIn

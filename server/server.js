@@ -7,6 +7,7 @@ import https from 'https'
 import http from 'http'
 import passport from 'passport'
 import session from 'express-session'
+import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import socketio from 'socket.io'
 import {passportConfig} from './operations/passportConfig'
@@ -33,14 +34,15 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 app.use(passport.initialize())
 
-passportConfig()
 
-app.use(cors({origin: clientOrigin}))
+app.use(cookieParser())
+app.use(cors({origin: clientOrigin,credentials: true}))
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true
 }))
+passportConfig()
 
 const io = socketio(server)
 app.set('io', io)
