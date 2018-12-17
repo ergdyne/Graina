@@ -8,6 +8,6 @@ sequelize db:migrate
 run scripts from dbSetup.sql to create views/functions
 maybe delete config data
 
-add values to .env for dev mode or actual env for production
+add values to .env (rename example.env) for dev mode or actual env for production
 
 should npm start should work at this point (untested on clean build)

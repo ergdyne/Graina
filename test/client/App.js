@@ -23,14 +23,6 @@ describe("App component", ()=>{
       const header = shallow(<App/>).find("header")
       expect(header.length).to.equal(1)
     })
-    describe("contains a Grid", ()=>{
-      const grid = shallow(<App/>).find(Grid)
-      it("only one Grid",()=>{
-        expect(grid.length).to.equal(1)
-      })
-      it("has size passed",()=>{
-        expect(grid.props().size).to.be.above(0)
-      })
-    })
+  
   })
 })
