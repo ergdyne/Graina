@@ -6,9 +6,12 @@ module.exports={
     return current_settings
       .findAll()
       .then(cs =>{
-        console.log(cs)
-        console.log("hello")
-        res.status(200).send({message: "heyhey"})
+        const settings = 
+          JSON.parse(`{${cs
+            .map(c=>c.toJSON())
+            .map(cv =>`"${cv.name}":${cv.quantity}`)
+            .join(',')}}`)
+        res.status(200).send(settings)
       })
       .catch(e => res.status(400).send(e))
   }

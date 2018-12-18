@@ -71,12 +71,12 @@ create view world_map_420 as select * from world_map(420);
 
 insert into setting_version (created_at) values (current_timestamp);
 insert into setting (fk_setting_version, "name", quantity) values 
-(1, 'R', 50),
-(1, 'O', 50),
-(1, 'Y', 50),
-(1, 'G', 50),
-(1, 'B', 50),
-(1, 'V', 50),
+(1, 'RED', 50),
+(1, 'ORANGE', 50),
+(1, 'YELLOW', 50),
+(1, 'GREEN', 50),
+(1, 'BLUE', 50),
+(1, 'VIOLET', 50),
 (1, 'COOL_DOWN', 60*60*1000),
 (1, 'MAX_CLICKS', 300),
 (1, 'GRID_SIZE_X', 5),
