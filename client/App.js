@@ -16,13 +16,12 @@ export default class App extends React.Component {
     super()
     this.state = {
       data:[],
-      gridXSize:5,
-      gridYSize:5,
       size:75,
       loggedIn:false,
       worldMapData:[],
       player:{},
-      gridProps:{}
+      gridProps:{},
+      settings:{}
     }
   }
 
@@ -41,16 +40,25 @@ export default class App extends React.Component {
     .then(res => {return res.json()})
     .then(gs=>{
       this.setState({data:grainStateToGrid(gs)})
+      const {GRID_SIZE_X, GRID_SIZE_Y} = this.state.settings
+      const {x, y} = this.state.player
       this.setState({
-        gridProps:gridProps(this.state.gridXSize, this.state.gridYSize, this.state.player.x,this.state.player.y)
+        gridProps:gridProps(GRID_SIZE_X, GRID_SIZE_Y, x, y)
       })
     })
+  }
+
+  loadSettings = () =>{
+    fetch(`${apiURL}/api/setting`)
+    .then(res => {return res.json()})
+    .then(s => this.setState({settings:s}))
   }
 
   logIn = () =>{
     this.updatePlayer()
     this.updateWorldMap()
   }
+
   updatePlayer = () =>{
     fetch(`${apiURL}/api/player_data/`,{credentials: 'include'})
     .then(res => {
@@ -104,6 +112,7 @@ export default class App extends React.Component {
   }
 
   componentWillMount(){
+    this.loadSettings()
     //well do a fetch to check with server?
     this.updatePlayer()
     if(this.state.loggedIn){
@@ -133,6 +142,7 @@ export default class App extends React.Component {
               <Grid 
                 size={this.state.size} 
                 data={this.state.data}
+                settings={this.state.settings}
                 gridProps={this.state.gridProps}
                 click={this.handleClick}
               />
