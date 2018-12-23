@@ -49,7 +49,7 @@ export default class App extends React.Component {
   }
 
   loadSettings = () =>{
-    fetch(`${apiURL}/api/setting`)
+    fetch(`${apiURL}/api/settings`)
     .then(res => {return res.json()})
     .then(s => this.setState({settings:s}))
   }

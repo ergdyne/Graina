@@ -4,7 +4,7 @@ import {
   grid as gridController,
   play as playController,
   playerData as playerDataController,
-  setting as settingController,
+  settings as settingsController,
   worldMap as worldMapController
 } from '../controllers/controllers'
 
@@ -18,7 +18,7 @@ module.exports = (app) => {
 
   app.get('/api/player_data/', playerDataController.retrieve)
 
-  app.get('/api/setting/', settingController.retrieve)
+  app.get('/api/settings/', settingsController.retrieve)
 
   app.get('/api/world_map/', worldMapController.retrieve)
 }
