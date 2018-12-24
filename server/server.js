@@ -11,7 +11,7 @@ import cors from 'cors'
 import socketio from 'socket.io'
 import {passportConfig} from './operations/passportConfig'
 
-//TEMP - different set up fro production... not sure what it is yet
+//TEMP - different set up from production... not sure what it is yet
 const certOptions = {
   key: fs.readFileSync(path.resolve('./server.key')),
   cert: fs.readFileSync(path.resolve('./server.crt'))
