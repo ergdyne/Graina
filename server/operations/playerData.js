@@ -1,4 +1,5 @@
 import {player_data} from '../models/models'
+import clicksRemaining from './clicksRemaining'
 
 export default function playerData(pkPlayer){
   return new Promise(function (resolve, reject) {
@@ -8,7 +9,12 @@ export default function playerData(pkPlayer){
       if(!p){
         reject('player not found')
       }else{
-        resolve(p)
+        const player = p.toJSON()
+        clicksRemaining(pkPlayer,player.r,player.g,player.b)
+        .then(clicks =>{
+          player.clicks = clicks
+          resolve(player)
+        })
       }
     })
     .catch(e => reject(e))
