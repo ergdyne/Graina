@@ -1,13 +1,16 @@
 import React from 'react'
 import io from 'socket.io-client'
 import Grid from './components/Grid'
+import UserData from './components/UserData'
 import WorldMap from './components/WorldMap'
+import ComsBox from './components/ComsBox'
 import OAuth from './components/OAuth'
 import {gridProps} from '../common/functions/gridMath'
 import style from './App.css'
 import logo from './logo.svg'
 //TEMP
 import grainStateToGrid from '../common/functions/grainStateToGrid'
+import grainStateToSignals from './functions/grainStateToSignals'
 const apiURL = 'https://localhost:8000'
 const socket = io(apiURL)
 
@@ -16,12 +19,14 @@ export default class App extends React.Component {
     super()
     this.state = {
       data:[],
+      signals:[],
       size:75,
       loggedIn:false,
       worldMapData:[],
       player:{},
       gridProps:{},
       settings:{}
+
     }
   }
 
@@ -39,9 +44,10 @@ export default class App extends React.Component {
     fetch(`${apiURL}/api/local_map/`,{credentials: 'include'})
     .then(res => {return res.json()})
     .then(gs=>{
+      const {x,y} = this.state.player
+      this.setState({signals:grainStateToSignals(gs,{x:x,y:y})})
       this.setState({data:grainStateToGrid(gs)})
       const {GRID_SIZE_X, GRID_SIZE_Y} = this.state.settings
-      const {x, y} = this.state.player
       this.setState({
         gridProps:gridProps(GRID_SIZE_X, GRID_SIZE_Y, x, y)
       })
@@ -147,6 +153,8 @@ export default class App extends React.Component {
                 click={this.handleClick}
               />
               <WorldMap data={this.state.worldMapData}/>
+              <UserData player={this.state.player}/>
+              <ComsBox signals={this.state.signals}/>
             </div>
           }
         </div> 
