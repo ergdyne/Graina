@@ -82,24 +82,29 @@ export default class App extends React.Component {
     })
   }
 
+  sendGrain = (signal) =>{
+    fetch(`${apiURL}/api/place_grain/`, {
+      method: 'POST',
+      body: JSON.stringify({
+        x: this.state.player.x,
+        y: this.state.player.y,
+        signal: signal
+      }),
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    })
+    .then(_ =>{ 
+      this.updateWorldMap()
+      this.updatePlayer()
+    })
+  }
+
   handleClick = (cell) =>{
     if(cell.x===this.state.player.x && cell.y===this.state.player.y){
-      fetch(`${apiURL}/api/place_grain/`, {
-        method: 'POST',
-        body: JSON.stringify({
-          x: cell.x,
-          y: cell.y,
-        }),
-        credentials: 'include',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-      })
-      .then(_ =>{ 
-        this.updateWorldMap()
-        this.updatePlayer()
-      })
+      this.sendGrain('')
     }else{
       fetch(`${apiURL}/api/move_player/`, {
         method: 'POST',
@@ -154,7 +159,10 @@ export default class App extends React.Component {
               />
               <WorldMap data={this.state.worldMapData}/>
               <UserData player={this.state.player}/>
-              <ComsBox signals={this.state.signals}/>
+              <ComsBox 
+                signals={this.state.signals} 
+                send={this.sendGrain}
+              />
             </div>
           }
         </div> 

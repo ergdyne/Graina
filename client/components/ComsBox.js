@@ -4,6 +4,15 @@ import {grainToRGB} from '../functions/grainImageLib'
 import style from './ComsBox.css'
 
 export default class ComsBox extends React.Component{
+  constructor(){
+    super()
+    this.state ={signal:''}
+  }
+
+  handleChange = (event) =>{
+    this.setState({signal:event.target.value})
+  }
+  
   render(){
     const signals = this.props.signals
     return(
@@ -16,9 +25,17 @@ export default class ComsBox extends React.Component{
           })}
         </div>
         <hr/>
-        <div className='ComsBox-Send'>
-          {'This is where we are going to chat'}
-        </div>
+        <form 
+          className='ComsBox-Send' 
+          onSubmit={()=>this.props.send(this.state.signal)}
+        >
+          <input 
+            type='text' 
+            value={this.state.value}
+            onChange={this.handleChange}
+          />
+          <input type='submit' value='Send'/>
+        </form>
       </div>
     )
   }
