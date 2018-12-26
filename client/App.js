@@ -83,34 +83,13 @@ export default class App extends React.Component {
   }
 
   sendGrain = (signal) =>{
-    fetch(`${apiURL}/api/place_grain/`, {
-      method: 'POST',
-      body: JSON.stringify({
-        x: this.state.player.x,
-        y: this.state.player.y,
-        signal: signal
-      }),
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-    })
-    .then(_ =>{ 
-      this.updateWorldMap()
-      this.updatePlayer()
-    })
-  }
-
-  handleClick = (cell) =>{
-    if(cell.x===this.state.player.x && cell.y===this.state.player.y){
-      this.sendGrain('')
-    }else{
-      fetch(`${apiURL}/api/move_player/`, {
+    if(this.state.player.clicks >= this.state.settings.GRAIN_COST){
+      fetch(`${apiURL}/api/place_grain/`, {
         method: 'POST',
         body: JSON.stringify({
-          x: cell.x,
-          y: cell.y,
+          x: this.state.player.x,
+          y: this.state.player.y,
+          signal: signal
         }),
         credentials: 'include',
         headers: {
@@ -118,7 +97,32 @@ export default class App extends React.Component {
           'Content-Type': 'application/json'
         },
       })
-      .then(_ => this.updatePlayer())
+      .then(_ =>{ 
+        this.updateWorldMap()
+        this.updatePlayer()
+      })
+    }//TODO - send the user some feedback eh?
+  }
+
+  handleClick = (cell) =>{
+    if(cell.x===this.state.player.x && cell.y===this.state.player.y){
+      this.sendGrain('')
+    }else{
+      if(this.state.player.clicks >= this.state.settings.MOVE_COST){
+        fetch(`${apiURL}/api/move_player/`, {
+          method: 'POST',
+          body: JSON.stringify({
+            x: cell.x,
+            y: cell.y,
+          }),
+          credentials: 'include',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        })
+        .then(_ => this.updatePlayer())
+      }//TODO feedback
     } 
   }
 
