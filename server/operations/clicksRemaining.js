@@ -13,9 +13,9 @@ export default function clicksRemaining(pkPlayer, r, g, b){
         if(color ===''){throw 'color not found'}
         const maxClicks = settings[color]
         const since = moment().subtract(settings.COOL_DOWN).toDate()
-        play.count({where:{created_at:{[Op.gte]:since}}})
+        play.count({where:{fk_player:pkPlayer, created_at:{[Op.gte]:since}}})
         .then(plays => {
-          grain.count({where:{created_at:{[Op.gte]:since}}})
+          grain.count({where:{fk_player:pkPlayer, created_at:{[Op.gte]:since}}})
           .then(grains => {
             const left = maxClicks - grains*settings.GRAIN_COST - plays*settings.MOVE_COST
             resolve(left>0?left:0)
