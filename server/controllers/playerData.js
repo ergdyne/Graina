@@ -1,18 +1,14 @@
-import {player_data} from '../models/models'
+import playerData from '../operations/playerData'
 
 module.exports={
-  retrieve(req, res){
+  async retrieve(req, res){
     const pkPlayer = (!req.session.passport)?0:(parseInt(req.session.passport.user) || 0)
-    return player_data
-      .findOne({
-        where:{
-          pk_player: pkPlayer
-        }
-      })
-      .then(p => {
-        if(!p){res.status(401).send(null)
-        }else{res.status(200).send(p)}
-      })
-      .catch(e => res.status(400).send(e))
+    try {
+      const p = await playerData(pkPlayer)
+      return res.status(200).send(p)
+    }
+    catch (e) {
+      return res.status(400).send(e)
+    }
   }
 }

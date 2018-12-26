@@ -1,13 +1,16 @@
 import React from 'react'
 import io from 'socket.io-client'
 import Grid from './components/Grid'
+import UserData from './components/UserData'
 import WorldMap from './components/WorldMap'
+import ComsBox from './components/ComsBox'
 import OAuth from './components/OAuth'
 import {gridProps} from '../common/functions/gridMath'
 import style from './App.css'
 import logo from './logo.svg'
 //TEMP
 import grainStateToGrid from '../common/functions/grainStateToGrid'
+import grainStateToSignals from './functions/grainStateToSignals'
 const apiURL = 'https://localhost:8000'
 const socket = io(apiURL)
 
@@ -16,13 +19,14 @@ export default class App extends React.Component {
     super()
     this.state = {
       data:[],
-      gridXSize:5,
-      gridYSize:5,
+      signals:[],
       size:75,
       loggedIn:false,
       worldMapData:[],
       player:{},
-      gridProps:{}
+      gridProps:{},
+      settings:{}
+
     }
   }
 
@@ -40,17 +44,27 @@ export default class App extends React.Component {
     fetch(`${apiURL}/api/local_map/`,{credentials: 'include'})
     .then(res => {return res.json()})
     .then(gs=>{
+      const {x,y} = this.state.player
+      this.setState({signals:grainStateToSignals(gs,{x:x,y:y})})
       this.setState({data:grainStateToGrid(gs)})
+      const {GRID_SIZE_X, GRID_SIZE_Y} = this.state.settings
       this.setState({
-        gridProps:gridProps(this.state.gridXSize, this.state.gridYSize, this.state.player.x,this.state.player.y)
+        gridProps:gridProps(GRID_SIZE_X, GRID_SIZE_Y, x, y)
       })
     })
+  }
+
+  loadSettings = () =>{
+    fetch(`${apiURL}/api/settings`)
+    .then(res => {return res.json()})
+    .then(s => this.setState({settings:s}))
   }
 
   logIn = () =>{
     this.updatePlayer()
     this.updateWorldMap()
   }
+
   updatePlayer = () =>{
     fetch(`${apiURL}/api/player_data/`,{credentials: 'include'})
     .then(res => {
@@ -68,13 +82,14 @@ export default class App extends React.Component {
     })
   }
 
-  handleClick = (cell) =>{
-    if(cell.x===this.state.player.x && cell.y===this.state.player.y){
+  sendGrain = (signal) =>{
+    if(this.state.player.clicks >= this.state.settings.GRAIN_COST){
       fetch(`${apiURL}/api/place_grain/`, {
         method: 'POST',
         body: JSON.stringify({
-          x: cell.x,
-          y: cell.y,
+          x: this.state.player.x,
+          y: this.state.player.y,
+          signal: signal
         }),
         credentials: 'include',
         headers: {
@@ -86,24 +101,33 @@ export default class App extends React.Component {
         this.updateWorldMap()
         this.updatePlayer()
       })
+    }//TODO - send the user some feedback eh?
+  }
+
+  handleClick = (cell) =>{
+    if(cell.x===this.state.player.x && cell.y===this.state.player.y){
+      this.sendGrain('')
     }else{
-      fetch(`${apiURL}/api/move_player/`, {
-        method: 'POST',
-        body: JSON.stringify({
-          x: cell.x,
-          y: cell.y,
-        }),
-        credentials: 'include',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-      })
-      .then(_ => this.updatePlayer())
+      if(this.state.player.clicks >= this.state.settings.MOVE_COST){
+        fetch(`${apiURL}/api/move_player/`, {
+          method: 'POST',
+          body: JSON.stringify({
+            x: cell.x,
+            y: cell.y,
+          }),
+          credentials: 'include',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+        })
+        .then(_ => this.updatePlayer())
+      }//TODO feedback
     } 
   }
 
   componentWillMount(){
+    this.loadSettings()
     //well do a fetch to check with server?
     this.updatePlayer()
     if(this.state.loggedIn){
@@ -133,10 +157,16 @@ export default class App extends React.Component {
               <Grid 
                 size={this.state.size} 
                 data={this.state.data}
+                settings={this.state.settings}
                 gridProps={this.state.gridProps}
                 click={this.handleClick}
               />
               <WorldMap data={this.state.worldMapData}/>
+              <UserData player={this.state.player}/>
+              <ComsBox 
+                signals={this.state.signals} 
+                send={this.sendGrain}
+              />
             </div>
           }
         </div> 

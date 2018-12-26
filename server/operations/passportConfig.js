@@ -7,7 +7,8 @@ export const passportConfig = () => {
   const googleConfig = {
     clientID: process.env.GOOGLE_KEY,
     clientSecret: process.env.GOOGLE_SECRET,
-    callbackURL: process.env.GOOGLE_CALLBACK_URL
+    callbackURL: process.env.GOOGLE_CALLBACK_URL,
+    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
   }
   
   passport.serializeUser((user, cb)=> {

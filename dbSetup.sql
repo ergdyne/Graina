@@ -68,3 +68,25 @@ create or replace function world_map (d integer)
 
 --in honor of Tesla
 create view world_map_420 as select * from world_map(420);
+
+insert into setting_version (created_at) values (current_timestamp);
+insert into setting (fk_setting_version, "name", quantity) values 
+(1, 'RED', 50),
+(1, 'ORANGE', 50),
+(1, 'YELLOW', 50),
+(1, 'GREEN', 50),
+(1, 'BLUE', 50),
+(1, 'VIOLET', 50),
+(1, 'COOL_DOWN', 60*60*1000),
+(1, 'MAX_CLICKS', 300),
+(1, 'GRID_SIZE_X', 5),
+(1, 'GRID_SIZE_Y', 5),
+(1, 'MOVE_COST', 1),
+(1, 'GRAIN_COST', 1);
+
+
+create view current_settings as
+select "name", quantity from
+setting 
+where fk_setting_version = 
+  (select max(pk_setting_version) from setting_version);

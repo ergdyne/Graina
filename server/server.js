@@ -4,7 +4,6 @@ import bodyParser from 'body-parser'
 import path from 'path'
 import fs from 'fs'
 import https from 'https'
-import http from 'http'
 import passport from 'passport'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
@@ -12,8 +11,7 @@ import cors from 'cors'
 import socketio from 'socket.io'
 import {passportConfig} from './operations/passportConfig'
 
-//TEMP - different set up fro production... not sure what it is yet
-import testSettings from '../common/test_data/testSettings'
+//TEMP - different set up from production... not sure what it is yet
 const certOptions = {
   key: fs.readFileSync(path.resolve('./server.key')),
   cert: fs.readFileSync(path.resolve('./server.crt'))
@@ -25,7 +23,6 @@ if (process.env.NODE_ENV !== 'production') {
 //create the server
 const app = express()
 const server = https.createServer(certOptions, app)
-
 
 app.use(morgan(process.env.NODE_ENV))
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -40,6 +37,7 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }))
+
 passportConfig()
 
 const io = socketio(server)

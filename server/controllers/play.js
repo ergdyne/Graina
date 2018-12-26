@@ -1,39 +1,36 @@
-import {play, player_data} from '../models/models'
+import {play} from '../models/models'
+import playerData from '../operations/playerData'
+import settingsJSON from '../operations/settingsJSON'
 
 module.exports={
   make(req, res){
-    return player_data
-      .findOne({
-        where:{
-          pk_player: parseInt(req.session.passport.user) || 0
-        }
-      })
-      .then(p => {
+    const pkPlayer = parseInt(req.session.passport.user)||0
+    playerData(pkPlayer)
+    .then(player => {
+      settingsJSON()
+      .then(settings =>{
         const x = parseInt(req.body.x)
         const y = parseInt(req.body.y)
-        if(isNaN(x)||isNaN(y)){
-          //and other reasons why this is not good
+        if(
+          isNaN(x) || 
+          isNaN(y) || 
+          player.clicks < settings.MOVE_COST ||
+          (player.x === x && player.y === y)
+        ){
           res.status(409).send(p)
         }else{
           return play
           .create({
-            fk_player:p.pk_player,
+            fk_player:pkPlayer,
             x:x,
             y:y
           })
-          .then(_ =>{
-            //get updated player_data
-            return player_data
-            .findOne({
-              where:{
-                pk_player: parseInt(req.session.passport.user) || 0
-              }
-            })
-            .then(pd =>{
-              res.status(201).send(pd)})
-          })//do I need each catch?
+          .then(r =>{
+            res.status(201).send(r)
+          })
         }
       })
-      .catch(e => res.status(400).send(e))
+    })
+    .catch(e => res.status(400).send(e))
   }
 }
