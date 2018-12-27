@@ -3,7 +3,8 @@ import Adapter from 'enzyme-adapter-react-16'
 import {configure, shallow} from 'enzyme'
 import {expect} from 'chai'
 import App from '../../client/App'
-import Grid from '../../client/components/Grid'
+
+//Have been lazy about testing since the start, so TODO?
 
 configure({adapter: new Adapter()})
 

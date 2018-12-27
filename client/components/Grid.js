@@ -6,7 +6,6 @@ import { findRow } from '../functions/cellData'
 import style from './Grid.css'
 
 export default class Grid extends React.Component{
-  //Grid made of Rows made of Cells
   render(){
     const start = this.props.gridProps.yStart
 

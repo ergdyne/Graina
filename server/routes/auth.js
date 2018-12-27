@@ -4,7 +4,7 @@ import {google} from '../controllers/auth'
 module.exports = (app) => {
   const googleAuth = passport.authenticate('google', {scope:['profile']})
 
-  app.get('/google/callback', googleAuth, google)
+  app.get('/api/google/callback', googleAuth, google)
  
   //This section is just about passing the socket id for io
   app.use((req, res, next)=>{
@@ -12,5 +12,5 @@ module.exports = (app) => {
     next()
   })
 
-  app.get('/google', googleAuth)
+  app.get('/api/google', googleAuth)
 }

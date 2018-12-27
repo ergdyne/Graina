@@ -3,6 +3,7 @@ function grainToRGB(grain){
   return `rgb(${grain.color.r},${grain.color.g},${grain.color.b})`
 }
 
+//for the centers of the grain images based on the diamond shape
 function xCoord(i){
   if(i===0){return (1+2*Math.sqrt(2))}
   if(i===2){return 1}

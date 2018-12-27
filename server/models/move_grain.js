@@ -1,5 +1,4 @@
 export default(sequelize, DataTypes) =>{
-  //Read Only
   const MoveGrain = sequelize.define('move_grain',{
     pk_grain:{
       primaryKey: true,

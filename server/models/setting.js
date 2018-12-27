@@ -1,5 +1,4 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const Setting = sequelize.define('setting', {
     pk_setting:{
       allowNull: false,
@@ -23,9 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       type: DataTypes.DATE
     }
-  }, {freezeTableName: true,timestamps: false});
-  Setting.associate = function(models) {
-    // associations can be defined here
-  };
-  return Setting;
-};
+  }, {freezeTableName: true,timestamps: false})
+  return Setting
+}

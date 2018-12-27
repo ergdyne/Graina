@@ -41,3 +41,6 @@ export default class ComsBox extends React.Component{
   }
 }
 
+ComsBox.propTypes = {
+  signals: PropTypes.arrayOf(PropTypes.object)
+}
