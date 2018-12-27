@@ -14,10 +14,13 @@ export default function worldMapImage(imageSize, data){
 
   return(
     <svg 
-      witdh={imageSize} height={imageSize} 
-      transform={'scale(1, -1)'}
+      transform={'scale(1, -1)'} 
+      viewBox={`0 0 ${imageSize} ${imageSize}`} 
+      preserveAspectRatio="xMidYMid"
     >
-      {pixels}
+      <g witdh={imageSize} height={imageSize} >
+        {pixels}
+      </g>
     </svg>
   )
 }

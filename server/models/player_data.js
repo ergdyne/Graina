@@ -1,5 +1,4 @@
 export default(sequelize, DataTypes) =>{
-  //Read Only
   const PlayerData = sequelize.define('player_data',{
     pk_player:{
       primaryKey: true,

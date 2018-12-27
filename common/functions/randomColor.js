@@ -1,5 +1,6 @@
 export default function randomColor(){
   //the goal is to generate a color that is roygbv and a litle light or dark
+  //well cyan not orange, but don't worry about it
   const x = Math.floor(Math.random()*131+125)
   const y = Math.floor(Math.random()*x/2)
 

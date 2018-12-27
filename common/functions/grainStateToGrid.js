@@ -2,7 +2,9 @@ export default function grainStateToGrid(grainState){
   const coords = 
     grainState.reduce((accumulator, currentValue) => 
     {
-      if(accumulator.some(i=>i.x===currentValue.x && i.y===currentValue.y)){return accumulator}
+      if(accumulator.some(i=>i.x===currentValue.x && i.y===currentValue.y)){
+        return accumulator
+      }
       return accumulator.concat([{x:currentValue.x,y:currentValue.y}])
     }, [])
 

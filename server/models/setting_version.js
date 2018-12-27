@@ -1,5 +1,4 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const SettingVersion = sequelize.define('setting_version', {
     pk_setting_version:{
       allowNull: false,
@@ -11,9 +10,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       type: DataTypes.DATE
     }
-  }, {freezeTableName: true,timestamps: false});
-  SettingVersion.associate = function(models) {
-    // associations can be defined here
-  };
-  return SettingVersion;
-};
+  }, {freezeTableName: true,timestamps: false})
+  return SettingVersion
+}

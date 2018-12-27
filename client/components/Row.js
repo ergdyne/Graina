@@ -7,7 +7,6 @@ import {range, rangeLength} from '../functions/rangeLib'
 import style from './Row.css'
 
 export default class Row extends React.Component{
-  //Row made of cells 
   render(){
     //breakable depending on padding...
     const start = this.props.xStart

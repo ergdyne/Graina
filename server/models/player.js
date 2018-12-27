@@ -24,8 +24,5 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.DATE
     }
   }, {freezeTableName: true,timestamps: false})
-  Player.associate = function(models) {
-    // associations can be defined here
-  }
   return Player
 }

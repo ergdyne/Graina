@@ -1,4 +1,3 @@
-//Holds all routes... if over 10 routes, think about breaking up
 import {
   grain as grainController,
   grid as gridController,
@@ -11,10 +10,10 @@ import {
 module.exports = (app) => {
 
   app.get('/api/local_map/', gridController.retrieve)
-  
-  app.post('/api/place_grain/', grainController.place)
 
   app.post('/api/move_player/',playController.make)
+  
+  app.post('/api/place_grain/', grainController.place)
 
   app.get('/api/player_data/', playerDataController.retrieve)
 

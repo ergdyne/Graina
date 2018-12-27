@@ -14,14 +14,10 @@ export default (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    //here to allow read
     created_at: {
       allowNull: true,
       type: DataTypes.DATE
     }
   }, {freezeTableName: true,timestamps: false})
-  Grain.associate = function(models) {
-    // associations can be defined here
-  }
   return Grain
 }
