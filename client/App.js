@@ -140,6 +140,8 @@ export default class App extends React.Component {
               />
             </div>
             : <div>
+              
+              {/* because of passing the size, sometimes these don't load right away... */}
               <Grid 
                 size={this.state.size} 
                 data={this.state.data}
@@ -147,7 +149,10 @@ export default class App extends React.Component {
                 gridProps={this.state.gridProps}
                 click={this.handleClick}
               />
-              <WorldMap data={this.state.worldMapData}/>
+              <WorldMap 
+                size={(this.state.settings.GRID_SIZE_X*this.state.size)}
+                data={this.state.worldMapData}
+              />
               <UserData player={this.state.player}/>
               <ComsBox 
                 signals={this.state.signals} 
