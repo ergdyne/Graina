@@ -150,7 +150,8 @@ export default class App extends React.Component {
                 click={this.handleClick}
               />
               <WorldMap 
-                size={(this.state.settings.GRID_SIZE_X*this.state.size)}
+                // size={(this.state.settings.GRID_SIZE_X*this.state.size)}
+                size={200}
                 data={this.state.worldMapData}
               />
               <UserData player={this.state.player}/>

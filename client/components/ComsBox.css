@@ -8,5 +8,15 @@
     margin-top: 1px;
     padding: 0;
     text-align: left;
+    width: 230px;
   }
+.ComsBox-signals {
+  height:25vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display:block;
+  
+}
   

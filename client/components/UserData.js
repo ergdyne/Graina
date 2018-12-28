@@ -7,7 +7,7 @@ export default class UserData extends React.Component{
     const player = this.props.player
     return(
       <div className='UserData'>
-        {`Clicks Remaining (${player.x}, ${player.y}): ${player.clicks}`}
+        {`(${player.x}, ${player.y}): ${player.clicks}`}
       </div>
     )
   }

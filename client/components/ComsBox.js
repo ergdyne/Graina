@@ -17,16 +17,8 @@ export default class ComsBox extends React.Component{
     const signals = this.props.signals
     return(
       <div className='ComsBox'>
-        <div className='ComsBox-Signals'>
-          {signals.map((s,i)=>{
-            return(<div key={i} style={{color:grainToRGB(s)}}>
-              {s.signal}
-            </div>)
-          })}
-        </div>
-        <hr/>
         <form 
-          className='ComsBox-Send' 
+          className='ComsBox-send' 
           onSubmit={()=>this.props.send(this.state.signal)}
         >
           <input 
@@ -36,6 +28,14 @@ export default class ComsBox extends React.Component{
           />
           <input type='submit' value='Send'/>
         </form>
+        <hr/>
+        <div className='ComsBox-signals'>
+          {signals.map((s,i)=>{
+            return(<div key={i} style={{color:grainToRGB(s)}}>
+              {s.signal}
+            </div>)
+          })}
+        </div>
       </div>
     )
   }

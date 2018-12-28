@@ -10,7 +10,7 @@ export default class WorldMap extends React.Component{
       className='WorldMap'
       style={{width: this.props.size, height: this.props.size}}
       >
-        {worldMapImage(420,this.props.data)}
+        {worldMapImage(this.props.size,this.props.data)}
       </div>
     )
   }
