@@ -13,13 +13,21 @@ export default class ComsBox extends React.Component{
     this.setState({signal:event.target.value})
   }
   
+  handleSubmit = (event) =>{
+    event.preventDefault()
+    this.props.send(this.state.signal)
+    this.setState({signal:''})
+    document.getElementById('ComsBox-form').reset()
+  }
+
   render(){
     const signals = this.props.signals
     return(
       <div className='ComsBox'>
         <form 
+          id='ComsBox-form'
           className='ComsBox-send' 
-          onSubmit={()=>this.props.send(this.state.signal)}
+          onSubmit={this.handleSubmit}
         >
           <input 
             type='text' 
