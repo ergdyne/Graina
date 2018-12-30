@@ -21,7 +21,7 @@ export default class App extends React.Component {
       gridProps:{},
       settings:{},
       signals:[],
-      size:85,
+      size:100,
       worldMapData:[]
     }
   }
@@ -54,6 +54,23 @@ export default class App extends React.Component {
   logIn = () =>{
     this.updatePlayer()
     this.updateWorldMap()
+  }
+
+  logOut = () =>{
+    fetch(`${apiURL}/api/logout`)
+    .then(res=>{
+      this.setState({
+        player:null,
+        data:[],
+        gridProps:{},
+        settings:{},
+        signals:[],
+        size:100,
+        worldMapData:[]
+      })
+      console.log('logout clicked')
+      
+    })
   }
 
   sendGrain = (signal) =>{
@@ -127,17 +144,28 @@ export default class App extends React.Component {
         <header className='App-header'>
           <img src={logo} className='App-logo' alt='logo' />
           <h1 className='App-title'>Welcome to Graina</h1>
+          <div className='App-Account'>
+            {!this.state.player
+              ? <div>
+                <OAuth 
+                  onLogIn={this.logIn}
+                  provider={'google'}
+                  key={'google'}
+                  apiURL={apiURL}
+                  socket={socket}
+                />
+              </div>
+              : <div> 
+                <UserData player={this.state.player}/>
+                <button className='App-logout' onClick={()=>this.logOut()}>{'Logout'}</button>
+              </div>
+            }
+          </div>
         </header>
         <div className='App-body'>
           {!this.state.player
             ? <div>
-              <OAuth 
-                onLogIn={this.logIn}
-                provider={'google'}
-                key={'google'}
-                apiURL={apiURL}
-                socket={socket}
-              />
+              
             </div>
             : <div>
               
@@ -149,16 +177,16 @@ export default class App extends React.Component {
                 gridProps={this.state.gridProps}
                 click={this.handleClick}
               />
-              <WorldMap 
-                // size={(this.state.settings.GRID_SIZE_X*this.state.size)}
-                size={200}
-                data={this.state.worldMapData}
-              />
-              <UserData player={this.state.player}/>
-              <ComsBox 
-                signals={this.state.signals} 
-                send={this.sendGrain}
-              />
+              <div className='App-info'>
+                <ComsBox 
+                  signals={this.state.signals} 
+                  send={this.sendGrain}
+                />
+                <WorldMap
+                  size={261}
+                  data={this.state.worldMapData}
+                />
+              </div>
             </div>
           }
         </div> 

@@ -30,13 +30,14 @@ export default class ComsBox extends React.Component{
           onSubmit={this.handleSubmit}
         >
           <input 
+            className='ComsBox-text'
             type='text' 
             value={this.state.value}
             onChange={this.handleChange}
           />
-          <input type='submit' value='Send'/>
+          <input className='ComsBox-button' type='submit' value='Send'/>
         </form>
-        <hr/>
+        
         <div className='ComsBox-signals'>
           {signals.map((s,i)=>{
             return(<div key={i} style={{color:grainToRGB(s)}}>

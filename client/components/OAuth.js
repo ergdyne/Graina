@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import style from './OAuth.css'
 
 export default class OAuth extends Component {
   componentDidMount() {
@@ -43,12 +44,13 @@ export default class OAuth extends Component {
     const { provider } = this.props
     //If desired to prevent multiple auth windows, can disable button
     return (
-      <div>
+      <div className='OAuth'>
         <div >
-          <button 
+          <button
+            className={`OAuth-${provider}`}
             onClick={this.startAuth}
           >
-            {provider}
+            {`Login with ${provider}`}
           </button>
         </div>
       </div>
