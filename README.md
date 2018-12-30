@@ -1,5 +1,8 @@
 Simple display for Simple "Game."
 
+install nvm via github instruction
+nvm install 11.2.0
+
 npm install
 
 set up a database

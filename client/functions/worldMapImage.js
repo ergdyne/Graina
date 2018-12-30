@@ -12,13 +12,19 @@ export default function worldMapImage(imageSize, data){
     />)
   })
 
+  const d = 
+    data.reduce((a,c)=>{
+      return Math.max(a,c.x,c.y)
+    },0)
+
   return(
     <svg 
       transform={'scale(1, -1)'} 
-      viewBox={`0 0 ${imageSize} ${imageSize}`} 
-      preserveAspectRatio="xMidYMid"
+      viewBox={`0 0 ${d} ${d}`}
+      width={imageSize} 
+      height={imageSize} 
     >
-      <g witdh={imageSize} height={imageSize} >
+      <g >
         {pixels}
       </g>
     </svg>

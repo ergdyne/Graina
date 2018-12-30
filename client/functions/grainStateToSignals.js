@@ -17,6 +17,6 @@ export default function grainStateToSignals(grainState, cell){
         color:{r:g.r,g:g.g,b:g.b},
         time:milliSince(g.created_at)
       }))
-    ,['-distance','-time'])
+    ,['distance','time'])
   )
 }

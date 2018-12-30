@@ -1,6 +1,6 @@
 .Cell {
-    background: #fff;
-    border: 1px solid #999;
+    background: rgb(0, 0, 0);
+    border: 1px solid rgb(255, 255, 255);
     float: left;
     font-size: 24px;
     font-weight: bold;
@@ -11,6 +11,68 @@
     text-align: center;
   }
   
-  .Cell:focus {
-    outline: none;
+.Cell:focus {
+  outline: none;
+}
+
+.Cell:hover{
+  animation: Cell-shake 1.02s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.Cell-symbol-0{
+  animation: Cell-symbol-spin infinite 20s linear;
+}
+.Cell-symbol-0:hover{
+  animation: Cell-symbol-spin-back infinite 0.5s linear;
+}
+
+.Cell-symbol-1{
+  animation: Cell-symbol-spin infinite 15s linear;
+}
+.Cell-symbol-1:hover{
+  animation: Cell-symbol-spin-back infinite 0.75s linear;
+}
+
+.Cell-symbol-2{
+  animation: Cell-symbol-spin-back infinite 20s linear;
+}
+.Cell-symbol-2:hover{
+  animation: Cell-symbol-spin infinite 0.75s linear;
+}
+
+.Cell-symbol-3{
+  animation: Cell-symbol-spin-back infinite 15s linear;
+}
+.Cell-symbol-3:hover{
+  animation: Cell-symbol-spin infinite 0.5s linear;
+}
+
+@keyframes Cell-symbol-spin{
+  from{transform: rotate(0deg);}
+  to{ transform: rotate(360deg);}
+}
+@keyframes Cell-symbol-spin-back{
+  from{transform: rotate(360deg);}
+  to{ transform: rotate(0deg);}
+}
+
+@keyframes Cell-shake {
+  10%, 90% {
+    transform: translate3d(-1px, -1px, 0);
   }
+  
+  20%, 80% {
+    transform: translate3d(0, 2px, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, -2px, 1px);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 2px, 0);
+  }
+}
