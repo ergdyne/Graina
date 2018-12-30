@@ -21,8 +21,6 @@ module.exports = (app) => {
 
   app.get('/api/world_map/', worldMapController.retrieve)
 
-  app.get('api/logout',function(req,res){
-    req.logout()
-    res.status(200).send({message:'logged out'})
-  })
+  app.get('/api/logout', playerDataController.logout)
+
 }

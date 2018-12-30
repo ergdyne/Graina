@@ -13,7 +13,6 @@ export default class Keanu extends React.Component{
   }
 
   miniGrains = () =>{
-    console.log('in the mini')
     const makeGrains = function(acc, countDown){
       if(countDown>0){
         return makeGrains(acc.concat([{color:randomColor()}]),countDown-1)
@@ -29,8 +28,6 @@ export default class Keanu extends React.Component{
         const xCoord = Math.floor(Math.random()*301)
         const yCoord = Math.floor(Math.random()*301)
         const miniType = Math.floor(Math.random()*4)
-
-        console.log(miniSize)
 
         return(
           <g 

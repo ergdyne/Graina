@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import style from './OAuth.css'
 
 export default class OAuth extends Component {
+  state={}
+
   componentDidMount() {
     const { socket, provider, onLogIn} = this.props
     socket.on(provider, _=> { 
@@ -11,16 +13,16 @@ export default class OAuth extends Component {
     })
   }
 
-  checkPopup() {
+  checkPopup = () =>{
     const check = setInterval(() => {
-      const { popup } = this
+      const {popup} = this
       if (!popup || popup.closed || popup.closed === undefined) {
         clearInterval(check)
       }
     }, 1000)
   }
 
-  openPopup() {
+  openPopup = () =>{
     const { provider, socket, apiURL } = this.props
     const width = 600, height = 600
     const left = (window.innerWidth / 2) - (width / 2)

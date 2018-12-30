@@ -10,5 +10,10 @@ module.exports={
     catch (e) {
       return res.status(400).send(e)
     }
+  },
+  logout(req,res){
+    req.session.destroy(() =>{
+      res.status(200).send({message:'logged out'})
+    })
   }
 }

@@ -18,6 +18,7 @@ export default class App extends React.Component {
   constructor(){
     super()
     this.state = {
+      player:null,
       data:[],
       gridProps:{},
       settings:{},
@@ -41,7 +42,10 @@ export default class App extends React.Component {
           credentials: 'include',
           headers: {'Accept': 'application/json','Content-Type': 'application/json'}
         })
-        .then(_ => this.updatePlayer())
+        .then(_ => {
+          this.updateGrid()
+          this.updatePlayer()
+        })
       }//TODO feedback
     } 
   }
@@ -53,12 +57,18 @@ export default class App extends React.Component {
   }
 
   logIn = () =>{
+    this.updateGrid()
     this.updatePlayer()
     this.updateWorldMap()
+    //These forceupdates does not fix the loading issues, so it might be something with lifecycle
+    this.forceUpdate()
+    setTimeout(()=>this.forceUpdate(),500)
+    setTimeout(()=>this.forceUpdate(),1000)
+    setTimeout(()=>this.forceUpdate(),1500)
   }
 
   logOut = () =>{
-    fetch(`${apiURL}/api/logout`)
+    fetch(`${apiURL}/api/logout`,{credentials: 'include'})
     .then(res=>{
       this.setState({
         player:null,
@@ -69,8 +79,6 @@ export default class App extends React.Component {
         size:100,
         worldMapData:[]
       })
-      console.log('logout clicked')
-      
     })
   }
 
@@ -87,12 +95,15 @@ export default class App extends React.Component {
         headers: {'Accept': 'application/json','Content-Type': 'application/json'}
       })
       .then(_ =>{ 
-        this.updateWorldMap()
+        this.updateGrid()
         this.updatePlayer()
+        this.updateWorldMap()
+        
       })
     }//TODO - send the user some feedback eh?
   }
 
+  //The actual fix is probably to make this whole thing an async
   updateGrid = () =>{
     fetch(`${apiURL}/api/local_map/`,{credentials: 'include'})
     .then(res => {return res.json()})
@@ -133,6 +144,7 @@ export default class App extends React.Component {
 
   componentWillMount(){
     this.loadSettings()
+    this.updateGrid()
     this.updatePlayer()
     if(this.state.player){
       this.updateWorldMap()

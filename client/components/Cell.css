@@ -36,6 +36,10 @@
   perspective: 1000px;
 }
 
+.Cell:active{
+  animation: Cell-pulse infinite 0.3s linear;
+}
+
 .Cell-symbol-0{
   animation: Cell-symbol-spin infinite 20s linear;
 }
