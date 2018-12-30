@@ -4,6 +4,7 @@ import Grid from './components/Grid'
 import UserData from './components/UserData'
 import WorldMap from './components/WorldMap'
 import ComsBox from './components/ComsBox'
+import Keanu from './components/Keanu'
 import OAuth from './components/OAuth'
 import {gridProps} from '../common/functions/gridMath'
 import style from './App.css'
@@ -165,7 +166,7 @@ export default class App extends React.Component {
         <div className='App-body'>
           {!this.state.player
             ? <div>
-              
+              <Keanu/>
             </div>
             : <div>
               
