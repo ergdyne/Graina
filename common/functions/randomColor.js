@@ -4,7 +4,7 @@ export default function randomColor(){
   const x = Math.floor(Math.random()*131+125)
   const y = Math.floor(Math.random()*x/2)
 
-  switch(Math.floor(Math.random())*6){
+  switch(Math.floor(Math.random()*6)){
     case 0: return ({r:x,g:y,b:y})
     case 1: return ({r:y,g:x,b:y})
     case 2: return ({r:y,g:y,b:x})

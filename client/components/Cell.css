@@ -10,6 +10,20 @@
     padding: 0;
     text-align: center;
   }
+
+.Cell-an-0{
+  animation: Cell-pulse infinite 10s linear;
+}
+.Cell-an-1{
+  animation: Cell-pulse infinite 100s linear;
+}
+.Cell-an-2{
+  animation: Cell-pulse infinite 1000s linear;
+}
+.Cell-an-3{
+  animation: Cell-pulse infinite 10000s linear;
+}
+
   
 .Cell:focus {
   outline: none;
@@ -20,6 +34,10 @@
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
+}
+
+.Cell:active{
+  animation: Cell-pulse infinite 0.3s linear;
 }
 
 .Cell-symbol-0{
@@ -48,6 +66,19 @@
 }
 .Cell-symbol-3:hover{
   animation: Cell-symbol-spin infinite 0.5s linear;
+}
+
+
+@keyframes Cell-pulse {
+  0% {
+    background-color: black;
+  }
+  50% {
+    background-color:#222;
+  }
+  100% {
+    background-color:black;
+  }
 }
 
 @keyframes Cell-symbol-spin{

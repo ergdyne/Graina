@@ -90,3 +90,11 @@ select "name", quantity from
 setting 
 where fk_setting_version = 
   (select max(pk_setting_version) from setting_version);
+
+insert into player (r,g,b) values (0,255,255);
+insert into grain (signal,fk_player) values ('I am the start of the game.',1);
+insert into grain_location (fk_grain,x,y) values (1,0,0);
+insert into grain (signal,fk_player) values ('I am at the start of the game.',1);
+insert into grain_location (fk_grain,x,y) values (2,1,1);
+insert into grain (signal,fk_player) values ('And I am the End.',1);
+insert into grain_location (fk_grain,x,y) values (3,2,3);

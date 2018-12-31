@@ -1,0 +1,109 @@
+.Keanu {
+  background: #000;
+  align-self: center;
+  height: 768px;
+  width: 768px;
+}
+
+.Keanu:hover{
+  animation: Keanu-shake 1.02s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.Keanu-image {
+  animation: Keanu-pulse infinite 20s linear;
+}
+
+.Keanu-symbol{
+  animation: Keanu-symbol-spin infinite 20s linear;
+}
+
+.Keanu-symbol:active {
+  animation: Keanu-symbol-spin-back infinite 0.5s linear;
+}
+
+.Keanu-ellipse-120:hover{
+  animation: Keanu-symbol-spin infinite 1s linear;
+}
+
+.Keanu-ellipse-60:hover{
+  animation: Keanu-symbol-spin-back infinite 1s linear;
+}
+
+.Keanu-center:hover{
+  visibility: hidden;
+}
+
+
+
+@keyframes Keanu-pulse {
+  0% {
+    background-color: black;
+  }
+  50% {
+    background-color:#222;
+  }
+  100% {
+    background-color:black;
+  }
+}
+
+@keyframes Keanu-symbol-spin{
+  from{transform: rotate(0deg);}
+  to{ transform: rotate(360deg);}
+}
+@keyframes Keanu-symbol-spin-back{
+  from{transform: rotate(360deg);}
+  to{ transform: rotate(0deg);}
+}
+
+@keyframes Keanu-shake {
+  10%, 90% {
+    transform: translate3d(-1px, -1px, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(0, 2px, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, -2px, 1px);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 2px, 0);
+  }
+}
+
+
+.Mini-symbol-0{
+  animation: Keanu-symbol-spin infinite 20s linear;
+}
+.Mini-symbol-0:hover{
+  animation: Keanu-symbol-spin-back infinite 0.5s linear;
+}
+
+.Mini-symbol-1{
+  animation: Keanu-symbol-spin infinite 15s linear;
+}
+.Mini-symbol-1:hover{
+  animation: Keanu-symbol-spin-back infinite 0.75s linear;
+}
+
+.Mini-symbol-2{
+  animation: Keanu-symbol-spin-back infinite 20s linear;
+}
+.Mini-symbol-2:hover{
+  animation: Keanu-symbol-spin infinite 0.75s linear;
+}
+
+.Mini-symbol-3{
+  animation: Keanu-symbol-spin-back infinite 15s linear;
+}
+.Mini-symbol-3:hover{
+  animation: Keanu-symbol-spin infinite 0.5s linear;
+}
+
+
