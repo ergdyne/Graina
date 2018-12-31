@@ -12,10 +12,15 @@ import socketio from 'socket.io'
 import {passportConfig} from './operations/passportConfig'
 
 //TEMP - different set up from production... not sure what it is yet
-const certOptions = {
+const certOptions = (process.env.NODE_ENV !== 'production')?{
   key: fs.readFileSync(path.resolve('./server.key')),
   cert: fs.readFileSync(path.resolve('./server.crt'))
+}:{
+  key: fs.readFileSync('/etc/letsencrypt/live/www.example.com/privkey.pem', 'utf8'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/www.example.com/cert.pem', 'utf8'),
+  ca: fs.readFileSync('/etc/letsencrypt/live/www.example.com/chain.pem', 'utf8')
 }
+
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
 }
