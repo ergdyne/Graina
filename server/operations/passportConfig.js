@@ -1,7 +1,7 @@
 import passport from 'passport'
 import {OAuth2Strategy as GoogleStrategy} from 'passport-google-oauth'
 import {auth_google,play, player} from '../models/models'
-import randomColor from '../../common/functions/randomColor'
+import randomColor from '../common/functions/randomColor'
 
 export const passportConfig = () => {
   const googleConfig = {

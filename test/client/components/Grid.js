@@ -3,7 +3,7 @@ import {expect} from 'chai'
 import {shallow} from 'enzyme'
 import Grid from '../../../client/components/Grid'
 import Row from '../../../client/components/Row'
-import testGrid from '../../../common/test_data/testGrid'
+import testGrid from '../../../server/common/test_data/testGrid'
 
 describe("Grid",()=>{
   const gridProps = {

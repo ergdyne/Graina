@@ -1,5 +1,5 @@
 import {grain_location,move_grain} from '../models/models'
-import grainStateToGrid from '../../common/functions/grainStateToGrid'
+import grainStateToGrid from '../common/functions/grainStateToGrid'
 
 export default function grainFlow(){
   move_grain

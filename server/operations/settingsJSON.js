@@ -1,5 +1,5 @@
 import {current_settings} from '../models/models'
-import {keyNumberToJSON} from '../../common/functions/ergJSON'
+import {keyNumberToJSON} from '../common/functions/ergJSON'
 
 export default function settingsJSON(){
   return new Promise(function (resolve, reject){

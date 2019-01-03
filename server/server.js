@@ -1,9 +1,11 @@
+import "@babel/polyfill"
 import express from 'express'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import path from 'path'
 import fs from 'fs'
 import https from 'https'
+import http from 'http'
 import passport from 'passport'
 import session from 'express-session'
 import cookieParser from 'cookie-parser'
@@ -15,11 +17,7 @@ import {passportConfig} from './operations/passportConfig'
 const certOptions = (process.env.NODE_ENV !== 'production')?{
   key: fs.readFileSync(path.resolve('./server.key')),
   cert: fs.readFileSync(path.resolve('./server.crt'))
-}:{
-  key: fs.readFileSync('/etc/letsencrypt/live/www.example.com/privkey.pem', 'utf8'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/www.example.com/cert.pem', 'utf8'),
-  ca: fs.readFileSync('/etc/letsencrypt/live/www.example.com/chain.pem', 'utf8')
-}
+}:{}
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
@@ -27,7 +25,9 @@ if (process.env.NODE_ENV !== 'production') {
 
 //create the server
 const app = express()
-const server = https.createServer(certOptions, app)
+const server = (process.env.NODE_ENV !== 'production')?
+  https.createServer(certOptions, app):
+  http.createServer(app)
 
 app.use(morgan(process.env.NODE_ENV))
 app.use(bodyParser.urlencoded({ extended: true }))

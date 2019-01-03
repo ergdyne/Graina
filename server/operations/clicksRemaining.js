@@ -2,7 +2,7 @@ import moment from 'moment'
 import sequelize from 'sequelize'
 import settingsJSON from './settingsJSON'
 import {play, grain} from '../models/models'
-import rgbToROYGBV from '../../common/functions/rgbToROYGBV'
+import rgbToROYGBV from '../common/functions/rgbToROYGBV'
 const Op = sequelize.Op
 
 export default function clicksRemaining(pkPlayer, r, g, b){

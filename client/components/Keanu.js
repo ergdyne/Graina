@@ -1,5 +1,5 @@
 import React from 'react'
-import randomColor from '../../common/functions/randomColor'
+import randomColor from '../../server/common/functions/randomColor'
 import {grainToRGB} from '../functions/grainImageLib'
 import stye from './Keanu.css'
 
