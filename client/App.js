@@ -155,9 +155,12 @@ export default class App extends React.Component {
     return (
       <div className='App'>
         <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-          <h1 className='App-title'>Welcome to Graina</h1>
-          <div className='App-Account'>
+          <div className='App-intro'>
+            <img src={logo} className='App-logo' alt='logo' />
+            <h1 className='App-title'>Graina</h1>
+          </div>
+          <div className='App-clear'></div>
+          <div className='App-account'>
             {!this.state.player
               ? <div>
                 <OAuth 
@@ -202,7 +205,12 @@ export default class App extends React.Component {
               </div>
             </div>
           }
-        </div> 
+        </div>
+        <footer className='App-footer'>
+          <div>Inspired by <a href='https://youtu.be/1MtEUErz7Gg'>Numberphile Sandpiles</a></div>
+          <div>Source code at <a href='https://github.com/ergdyne/Graina'>github/ergdyne/Graina</a></div>
+          <div>If you would like to see this website continue, contact on github or <a href='mailto:graina@ergdyne.com'>email</a>.</div>
+        </footer>
       </div>
     )
   }
