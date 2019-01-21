@@ -1,4 +1,6 @@
-Graina is an communal art project / difficult to use, weird chat webapp built using PosgreSQL, Express, React, and Node. It was inspired by Numberphile's Sandpiles video: https://youtu.be/1MtEUErz7Gg 
+Graina is an communal art project / difficult to use, weird chat webapp built using PosgreSQL, Express, React, and Node. It was inspired by Numberphile's Sandpiles video: https://youtu.be/1MtEUErz7Gg
+
+Live version running at https://jimsdumb.com
 
 Code on live version is slightly off from code in repo due to last minute changes to get things running (quickly). Best practices not in place for same reasons.
 
