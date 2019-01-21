@@ -19,11 +19,11 @@ const certOptions = (process.env.NODE_ENV !== 'production')?{
   cert: fs.readFileSync(path.resolve('./server.crt'))
 }:{}
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').load();
-}
+//because of not being able to get production env to work fully, using dotenv regardless of dev or production
+require('dotenv').load();
 
-//create the server
+
+//Production server will use port forwarding through nginx to get https
 const app = express()
 const server = (process.env.NODE_ENV !== 'production')?
   https.createServer(certOptions, app):
